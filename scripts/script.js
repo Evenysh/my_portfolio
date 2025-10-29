@@ -1,3 +1,73 @@
+// Данные проектов
+const projectsData = [
+    {
+        id: 1,
+        title: "Личный сайт",
+        category: "html",
+        description: "Современный адаптивный сайт-портфолио",
+        technologies: ["HTML", "CSS", "JavaScript"],
+        details: "Элегантный адаптивный сайт-портфолио с акцентом на чистый дизайн и удобство использования. Полностью адаптирован для мобильных устройств.",
+        icon: "🌐",
+        date: "Октябрь 2025",
+        demoLink: "http://127.0.0.1:5500/index.html",
+        githubLink: "https://github.com/Evenysh/my_portfolio"
+    },
+    {
+        id: 2,
+        title: "Одностраничный сайт",
+        category: "html",
+        description: "Минималистичный сайт для изучения вёрстки",
+        technologies: ["HTML", "CSS"],
+        details: "Простой и чистый одностраничный сайт, созданный для отработки навыков вёрстки и освоения базовых принципов веб-дизайна.",
+        icon: "✅",
+        date: "Сентябрь 2025",
+        demoLink: "https://evenysh.github.io/four_rules_of_layout/", // ← ИСПРАВЬТЕ НА demoLink
+        githubLink: "https://github.com/Evenysh/four_rules_of_layout"
+    },
+    {
+        id: 3,
+        title: "Проект от МИРЭА",
+        category: "html", 
+        description: "Портфолио студента",
+        technologies: ["HTML", "CSS", "JavaScript"],
+        details: "Многостраничный сайт",
+        icon: "🌐",
+        date: "Сентябрь 2025",
+        demoLink: "https://evenysh.github.io/frontend-and-backend-practice/",
+        githubLink: "https://github.com/Evenysh/frontend-and-backend-practice"
+    },
+    {
+        id: 4,
+        title: "Лендинг-пейдж",
+        category: "html",
+        description: "Посадочная страница для бизнеса",
+        technologies: ["HTML", "CSS", "Bootstrap"],
+        details: "Продающая посадочная страница с адаптивным дизайном и оптимизацией для поисковых систем.",
+        icon: "🎨",
+        date: "Март 2025"
+    },
+    {
+        id: 5,
+        title: "Погодное приложение",
+        category: "js",
+        description: "Приложение для просмотра погоды",
+        technologies: ["JavaScript", "API"],
+        details: "Приложение для получения актуальной информации о погоде с использованием открытого API.",
+        icon: "☀️",
+        date: "Апрель 2025"
+    },
+    {
+        id: 6,
+        title: "Чат-приложение",
+        category: "react",
+        description: "Реал-тайм чат",
+        technologies: ["React", "WebSocket"],
+        details: "Приложение для общения в реальном времени с созданием комнат и обменом сообщений.",
+        icon: "💬",
+        date: "Май 2025"
+    }
+];
+
 // Базовые функции для главной страницы
 document.addEventListener('DOMContentLoaded', function() {
     // Анимация прогресс-баров
@@ -44,82 +114,57 @@ document.addEventListener('DOMContentLoaded', function() {
                 });
         });
     }
+    
+    // Загружаем проекты на главную страницу
+    if (document.getElementById('homeProjectsContainer')) {
+        renderHomepageProjects();
+    }
+    
+    // Инициализация фильтров на странице проектов
+    if (document.getElementById('projectsGrid')) {
+        renderProjects();
+        setupFilters();
+    }
 });
 
-// Данные проектов
-const projectsData = [
-    {
-        id: 1,
-        title: "Личный сайт",
-        category: "html",
-        description: "Современный адаптивный сайт-портфолио",
-        technologies: ["HTML5", "CSS3", "JavaScript"],
-        details: "Элегантный адаптивный сайт-портфолио с акцентом на чистый дизайн и удобство использования. Полностью адаптирован для мобильных устройств.",
-        icon: "🌐",
-        date: "Декабрь 2024"
-    },
-    {
-        id: 2,
-        title: "Todo-приложение", 
-        category: "js",
-        description: "Минималистичное приложение для управления задачами",
-        technologies: ["JavaScript", "LocalStorage"],
-        details: "Простое и эффективное приложение для управления повседневными задачами с локальным сохранением данных.",
-        icon: "✅",
-        date: "Январь 2025"
-    },
-    {
-        id: 3,
-        title: "Интернет-магазин",
-        category: "react", 
-        description: "Прототип интернет-магазина",
-        technologies: ["React", "API"],
-        details: "Функциональный прототип интернет-магазина с корзиной товаров и системой фильтрации.",
-        icon: "🛒",
-        date: "Февраль 2025"
-    },
-    {
-        id: 4,
-        title: "Лендинг-пейдж",
-        category: "html",
-        description: "Посадочная страница для бизнеса",
-        technologies: ["HTML", "CSS", "Bootstrap"],
-        details: "Продающая посадочная страница с адаптивным дизайном и оптимизацией для поисковых систем.",
-        icon: "🎨",
-        date: "Март 2025"
-    },
-    {
-        id: 5,
-        title: "Погодное приложение",
-        category: "js",
-        description: "Приложение для просмотра погоды",
-        technologies: ["JavaScript", "API"],
-        details: "Приложение для получения актуальной информации о погоде с использованием открытого API.",
-        icon: "☀️",
-        date: "Апрель 2025"
-    },
-    {
-        id: 6,
-        title: "Чат-приложение",
-        category: "react",
-        description: "Реал-тайм чат",
-        technologies: ["React", "WebSocket"],
-        details: "Приложение для общения в реальном времени с созданием комнат и обменом сообщениями.",
-        icon: "💬",
-        date: "Май 2025"
-    }
-];
+// Функция для отображения проектов на главной странице
+function renderHomepageProjects() {
+    const container = document.getElementById('homeProjectsContainer');
+    const featuredProjects = projectsData.slice(0, 3); // Показываем первые 3 проекта
+    
+    container.innerHTML = featuredProjects.map(project => `
+        <div class="col-md-4">
+            <div class="project-preview-card" onclick="openProjectModal(${project.id})" style="cursor: pointer;">
+                <div class="preview-icon">${project.icon}</div>
+                <h3>${project.title}</h3>
+                <p>${project.description}</p>
+                <div class="tech-tags">
+                    ${project.technologies.map(tech => 
+                        `<span class="tech-tag">${tech}</span>`
+                    ).join('')}
+                </div>
+                <div class="project-actions mt-3">
+                    <button class="btn btn-primary btn-sm" onclick="event.stopPropagation(); openProjectModal(${project.id})">
+                        Подробнее
+                    </button>
+                </div>
+            </div>
+        </div>
+    `).join('');
+}
 
-// Функция для отображения проектов
+// Функция для отображения проектов на странице проектов
 function renderProjects(filter = 'all') {
     const grid = document.getElementById('projectsGrid');
+    if (!grid) return;
+    
     const filteredProjects = filter === 'all' 
         ? projectsData 
         : projectsData.filter(project => project.category === filter);
     
     grid.innerHTML = filteredProjects.map(project => `
         <div class="col-lg-4 col-md-6 project-item" data-category="${project.category}">
-            <div class="project-card" onclick="openProjectModal(${project.id})">
+            <div class="project-card" onclick="openProjectModal(${project.id})" style="cursor: pointer;">
                 <div class="project-icon">${project.icon}</div>
                 <h3 class="project-title">${project.title}</h3>
                 <p class="project-description">${project.description}</p>
@@ -134,26 +179,45 @@ function renderProjects(filter = 'all') {
     `).join('');
 }
 
+
 // Функция для открытия модального окна
 function openProjectModal(projectId) {
     const project = projectsData.find(p => p.id === projectId);
+    if (!project) return;
+    
     document.getElementById('modalProjectTitle').textContent = project.title;
+    
+    // Создаем кнопки независимо от проверок
+    let demoButton = '';
+    let githubButton = '';
+    
+    // Кнопка "Посмотреть демо" - всегда показываем если есть ссылка
+    if (project.demoLink && project.demoLink !== '#' && project.demoLink.trim() !== '') {
+        demoButton = `<a href="${project.demoLink}" target="_blank" class="btn btn-primary me-2">Посмотреть демо</a>`;
+    }
+    
+    // Кнопка "Исходный код"
+    if (project.githubLink && project.githubLink !== '#' && project.githubLink.trim() !== '') {
+        githubButton = `<a href="${project.githubLink}" target="_blank" class="btn btn-outline-secondary">Исходный код</a>`;
+    }
+    
     document.getElementById('modalProjectBody').innerHTML = `
         <div class="modal-project-content">
-            <div class="modal-project-icon">${project.icon}</div>
+            <div class="modal-project-icon text-center mb-3" style="font-size: 3rem;">${project.icon}</div>
             <p><strong>Описание:</strong> ${project.details}</p>
             <p><strong>Технологии:</strong> ${project.technologies.join(', ')}</p>
             <p><strong>Дата создания:</strong> ${project.date}</p>
-            <div class="modal-project-links">
-                <button class="btn btn-primary">Посмотреть демо</button>
-                <button class="btn btn-outline-secondary">Исходный код</button>
+            <div class="modal-project-links mt-4">
+                ${demoButton}
+                ${githubButton}
             </div>
         </div>
     `;
     
-    new bootstrap.Modal(document.getElementById('projectModal')).show();
+    // Открываем модальное окно
+    const projectModal = new bootstrap.Modal(document.getElementById('projectModal'));
+    projectModal.show();
 }
-
 // Фильтрация проектов
 function setupFilters() {
     const filterBtns = document.querySelectorAll('.filter-btn');

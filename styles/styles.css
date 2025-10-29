@@ -51,6 +51,27 @@
     font-size: 8rem;
     opacity: 0.8;
 }
+.photo-container {
+    width: 300px; /* Настройте под ваш дизайн */
+    height: 300px;
+    border-radius: 50%; /* Для круглой фотографии */
+    overflow: hidden;
+    border: 4px solid #fff; /* Рамка вокруг фото */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    margin-left: auto; /* Это сдвинет контейнер вправо */
+    margin-right: 100px; /* Отступ от правого края */
+}
+
+.profile-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Чтобы фото заполнило контейнер */
+    transition: transform 0.3s ease;
+}
+
+.profile-photo:hover {
+    transform: scale(1.05); /* Легкое увеличение при наведении */
+}
 
 /* Секции */
 .skills-section,
@@ -196,7 +217,56 @@
     }
 }
 
+.project-actions {
+    margin-top: 15px;
+    text-align: center;
+}
 
+.project-card {
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.project-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+.modal-project-links {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.btn-primary {
+    background-color: #6f42c1;
+    border-color: #6f42c1;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    display: inline-block;
+}
+
+.btn-primary:hover {
+    background-color: #5a32a3;
+    border-color: #5a32a3;
+    color: white;
+}
+
+.btn-outline-secondary {
+    border: 2px solid #6c757d;
+    color: #6c757d;
+    background: transparent;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    display: inline-block;
+}
+
+.btn-outline-secondary:hover {
+    background-color: #6c757d;
+    color: white;
+}
 
 
 
