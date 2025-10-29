@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Контакты - Портфолио Студента</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/styles.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <nav class="navbar navbar-expand-lg navbar-light">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="../index.html">Портфолио</a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav ms-auto">
+                            <li class="nav-item">
+                                <a class="nav-link" href="../index.html">Главная</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="projects.html">Проекты</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="diary.html">Дневник</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link active" href="contacts.html">Контакты</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main">
+        <div class="container">
+            <h1 class="contacts-title">Свяжитесь со мной</h1>
+            <p class="contacts-subtitle">Буду рад обсудить новые возможности и проекты</p>
+
+            <div class="row">
+                <!-- Форма обратной связи -->
+                <div class="col-lg-8">
+                    <div class="contact-form">
+                        <form id="contactForm">
+                            <div class="form-group">
+                                <label for="name">Имя *</label>
+                                <input type="text" id="name" name="name" class="form-control" required placeholder="Введите ваше имя">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="email">Email *</label>
+                                <input type="email" id="email" name="email" class="form-control" required placeholder="example@mail.ru">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="subject">Тема</label>
+                                <input type="text" id="subject" name="subject" class="form-control" placeholder="Тема сообщения">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="message">Сообщение *</label>
+                                <textarea id="message" name="message" class="form-control" rows="5" required placeholder="Опишите вашу проблему или вопрос..."></textarea>
+                            </div>
+
+                            <button type="submit" class="submit-btn">Отправить сообщение</button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Контактная информация -->
+                <div class="col-lg-4">
+                    <div class="contact-info">
+                        <h3 class="contact-info-title">Контакты</h3>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">📧</div>
+                            <div class="contact-details">
+                                <strong>Email</strong>
+                                <p>student@edu.ru</p>
+                            </div>
+                        </div>
+
+                        <div class="contact-item">
+                            <div class="contact-icon">📱</div>
+                            <div class="contact-details">
+                                <strong>Телефон</strong>
+                                <p>+7 (910) 123-45-67</p>
+                            </div>
+                        </div>
+
+                        <div class="contact-item">
+                            <div class="contact-icon">💼</div>
+                            <div class="contact-details">
+                                <strong>GitHub</strong>
+                                <p>github.com/username</p>
+                            </div>
+                        </div>
+
+                        <div class="contact-item">
+                            <div class="contact-icon">🏠</div>
+                            <div class="contact-details">
+                                <strong>Адрес</strong>
+                                <p>г. Москва, ул. Пушкина, д. Колотушкина</p>
+                            </div>
+                        </div>
+
+                        <div class="contact-item">
+                            <div class="contact-icon">🕒</div>
+                            <div class="contact-details">
+                                <strong>Время работы</strong>
+                                <p>Пн-Пт: 9:00-18:00</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Портфолио студента</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../scripts/script.js"></script>
+</body>
+</html>

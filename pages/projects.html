@@ -6,70 +6,34 @@
     <title>Проекты - Портфолио Студента</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Bootstrap Icons -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-    <style>
-        .project-card {
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            cursor: pointer;
-        }
-        
-        .project-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-        }
-        
-        .filter-btn.active {
-            background-color: #667eea;
-            color: white;
-        }
-        
-        .modal-image {
-            width: 100%;
-            border-radius: 8px;
-            margin-bottom: 1rem;
-        }
-    </style>
+    <!-- Наши стили -->
+    <link rel="stylesheet" href="../styles/styles.css">
 </head>
 <body>
     <!-- Шапка с навигацией -->
-    <header class="bg-white shadow-sm">
+    <header class="header">
         <div class="container">
             <nav class="navbar navbar-expand-lg navbar-light">
                 <div class="container-fluid">
-                    <!-- Логотип -->
-                    <a class="navbar-brand logo text-primary" href="../index.html">
-                        <i class="bi bi-code-slash"></i>
-                        Моё Портфолио
+                    <a class="navbar-brand" href="../index.html">
+                        Портфолио
                     </a>
-                    
-                    <!-- Кнопка для мобильного меню -->
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                         <span class="navbar-toggler-icon"></span>
                     </button>
-                    
-                    <!-- Навигационное меню -->
                     <div class="collapse navbar-collapse" id="navbarNav">
                         <ul class="navbar-nav ms-auto">
                             <li class="nav-item">
-                                <a class="nav-link" href="../index.html">
-                                    <i class="bi bi-house me-1"></i>Главная
-                                </a>
+                                <a class="nav-link" href="../index.html">Главная</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link active" href="projects.html">
-                                    <i class="bi bi-folder me-1"></i>Проекты
-                                </a>
+                                <a class="nav-link active" href="projects.html">Проекты</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="diary.html">
-                                    <i class="bi bi-journal-text me-1"></i>Дневник
-                                </a>
+                                <a class="nav-link" href="diary.html">Дневник</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="contacts.html">
-                                    <i class="bi bi-telephone me-1"></i>Контакты
-                                </a>
+                                <a class="nav-link" href="contacts.html">Контакты</a>
                             </li>
                         </ul>
                     </div>
@@ -79,321 +43,54 @@
     </header>
 
     <!-- Основной контент -->
-    <main class="py-5">
+    <main class="main">
         <div class="container">
-            <!-- Заголовок и фильтры -->
             <div class="row mb-5">
                 <div class="col-12">
-                    <h1 class="text-center mb-4">Мои проекты</h1>
-                    <p class="text-center text-muted mb-4">Здесь собраны все мои учебные и личные проекты</p>
+                    <h1 class="projects-title">Мои проекты</h1>
                     
-                    <!-- Фильтры по технологиям -->
-                    <div class="text-center">
-                        <div class="btn-group" role="group">
-                            <button type="button" class="btn btn-outline-primary filter-btn active" data-filter="all">
-                                Все
-                            </button>
-                            <button type="button" class="btn btn-outline-primary filter-btn" data-filter="html">
-                                HTML/CSS
-                            </button>
-                            <button type="button" class="btn btn-outline-primary filter-btn" data-filter="js">
-                                JavaScript
-                            </button>
-                            <button type="button" class="btn btn-outline-primary filter-btn" data-filter="react">
-                                React
-                            </button>
-                        </div>
+                    <!-- Фильтры -->
+                    <div class="projects-filters">
+                        <button class="filter-btn active" data-filter="all">Все</button>
+                        <button class="filter-btn" data-filter="html">HTML/CSS</button>
+                        <button class="filter-btn" data-filter="js">JavaScript</button>
+                        <button class="filter-btn" data-filter="react">React</button>
                     </div>
                 </div>
             </div>
 
             <!-- Сетка проектов -->
             <div class="row g-4" id="projectsGrid">
-                <!-- Проект 1 -->
-                <div class="col-lg-4 col-md-6 project-item" data-category="html">
-                    <div class="card project-card h-100" data-bs-toggle="modal" data-bs-target="#projectModal1">
-                        <div class="card-body p-4">
-                            <div class="text-center mb-3">
-                                <div class="bg-primary rounded-circle d-inline-flex align-items-center justify-content-center" 
-                                     style="width: 80px; height: 80px; color: white;">
-                                    <i class="bi bi-globe" style="font-size: 2rem;"></i>
-                                </div>
-                            </div>
-                            <h5 class="card-title text-center">Личный сайт</h5>
-                            <p class="card-text text-muted text-center">
-                                Современный адаптивный сайт-портфолио с использованием HTML, CSS и JavaScript
-                            </p>
-                            <div class="text-center mb-3">
-                                <span class="badge bg-primary me-1">HTML</span>
-                                <span class="badge bg-primary me-1">CSS</span>
-                                <span class="badge bg-primary">JavaScript</span>
-                            </div>
-                            <div class="text-center">
-                                <small class="text-muted"><i class="bi bi-calendar me-1"></i>Декабрь 2024</small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Проект 2 -->
-                <div class="col-lg-4 col-md-6 project-item" data-category="js">
-                    <div class="card project-card h-100" data-bs-toggle="modal" data-bs-target="#projectModal2">
-                        <div class="card-body p-4">
-                            <div class="text-center mb-3">
-                                <div class="bg-success rounded-circle d-inline-flex align-items-center justify-content-center" 
-                                     style="width: 80px; height: 80px; color: white;">
-                                    <i class="bi bi-check2-square" style="font-size: 2rem;"></i>
-                                </div>
-                            </div>
-                            <h5 class="card-title text-center">Todo-приложение</h5>
-                            <p class="card-text text-muted text-center">
-                                Приложение для управления задачами с локальным хранилищем и фильтрацией
-                            </p>
-                            <div class="text-center mb-3">
-                                <span class="badge bg-success me-1">JavaScript</span>
-                                <span class="badge bg-success">LocalStorage</span>
-                            </div>
-                            <div class="text-center">
-                                <small class="text-muted"><i class="bi bi-calendar me-1"></i>Январь 2025</small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Проект 3 -->
-                <div class="col-lg-4 col-md-6 project-item" data-category="react">
-                    <div class="card project-card h-100" data-bs-toggle="modal" data-bs-target="#projectModal3">
-                        <div class="card-body p-4">
-                            <div class="text-center mb-3">
-                                <div class="bg-info rounded-circle d-inline-flex align-items-center justify-content-center" 
-                                     style="width: 80px; height: 80px; color: white;">
-                                    <i class="bi bi-cart" style="font-size: 2rem;"></i>
-                                </div>
-                            </div>
-                            <h5 class="card-title text-center">Интернет-магазин</h5>
-                            <p class="card-text text-muted text-center">
-                                Прототип интернет-магазина с корзиной товаров и динамическим контентом
-                            </p>
-                            <div class="text-center mb-3">
-                                <span class="badge bg-info me-1">React</span>
-                                <span class="badge bg-info">API</span>
-                            </div>
-                            <div class="text-center">
-                                <small class="text-muted"><i class="bi bi-calendar me-1"></i>Февраль 2025</small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Проект 4 -->
-                <div class="col-lg-4 col-md-6 project-item" data-category="html">
-                    <div class="card project-card h-100" data-bs-toggle="modal" data-bs-target="#projectModal4">
-                        <div class="card-body p-4">
-                            <div class="text-center mb-3">
-                                <div class="bg-warning rounded-circle d-inline-flex align-items-center justify-content-center" 
-                                     style="width: 80px; height: 80px; color: white;">
-                                    <i class="bi bi-palette" style="font-size: 2rem;"></i>
-                                </div>
-                            </div>
-                            <h5 class="card-title text-center">Лендинг-пейдж</h5>
-                            <p class="card-text text-muted text-center">
-                                Продающая посадочная страница с адаптивным дизайном и анимациями
-                            </p>
-                            <div class="text-center mb-3">
-                                <span class="badge bg-warning me-1">HTML</span>
-                                <span class="badge bg-warning me-1">CSS</span>
-                                <span class="badge bg-warning">Bootstrap</span>
-                            </div>
-                            <div class="text-center">
-                                <small class="text-muted"><i class="bi bi-calendar me-1"></i>Март 2025</small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Проект 5 -->
-                <div class="col-lg-4 col-md-6 project-item" data-category="js">
-                    <div class="card project-card h-100" data-bs-toggle="modal" data-bs-target="#projectModal5">
-                        <div class="card-body p-4">
-                            <div class="text-center mb-3">
-                                <div class="bg-danger rounded-circle d-inline-flex align-items-center justify-content-center" 
-                                     style="width: 80px; height: 80px; color: white;">
-                                    <i class="bi bi-weather-sunny" style="font-size: 2rem;"></i>
-                                </div>
-                            </div>
-                            <h5 class="card-title text-center">Погодное приложение</h5>
-                            <p class="card-text text-muted text-center">
-                                Приложение для просмотра погоды с использованием внешнего API
-                            </p>
-                            <div class="text-center mb-3">
-                                <span class="badge bg-danger me-1">JavaScript</span>
-                                <span class="badge bg-danger">API</span>
-                            </div>
-                            <div class="text-center">
-                                <small class="text-muted"><i class="bi bi-calendar me-1"></i>Апрель 2025</small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Проект 6 -->
-                <div class="col-lg-4 col-md-6 project-item" data-category="react">
-                    <div class="card project-card h-100" data-bs-toggle="modal" data-bs-target="#projectModal6">
-                        <div class="card-body p-4">
-                            <div class="text-center mb-3">
-                                <div class="bg-secondary rounded-circle d-inline-flex align-items-center justify-content-center" 
-                                     style="width: 80px; height: 80px; color: white;">
-                                    <i class="bi bi-chat-dots" style="font-size: 2rem;"></i>
-                                </div>
-                            </div>
-                            <h5 class="card-title text-center">Чат-приложение</h5>
-                            <p class="card-text text-muted text-center">
-                                Реал-тайм чат с использованием React и WebSocket
-                            </p>
-                            <div class="text-center mb-3">
-                                <span class="badge bg-secondary me-1">React</span>
-                                <span class="badge bg-secondary">WebSocket</span>
-                            </div>
-                            <div class="text-center">
-                                <small class="text-muted"><i class="bi bi-calendar me-1"></i>Май 2025</small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <!-- Проекты будут здесь -->
             </div>
         </div>
     </main>
 
-    <!-- Модальные окна проектов -->
-    
-    <!-- Модальное окно проекта 1 -->
-    <div class="modal fade" id="projectModal1" tabindex="-1">
+    <!-- Модальные окна -->
+    <div class="modal fade" id="projectModal" tabindex="-1">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Личный сайт</h5>
+                    <h5 class="modal-title" id="modalProjectTitle">Название проекта</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
-                <div class="modal-body">
-                    <div class="bg-light rounded p-4 text-center mb-4">
-                        <i class="bi bi-globe" style="font-size: 4rem; color: #667eea;"></i>
-                    </div>
-                    <h6>Описание проекта:</h6>
-                    <p>Современный адаптивный сайт-портфолио, разработанный с использованием чистого HTML, CSS и JavaScript. Сайт полностью адаптирован под мобильные устройства и имеет продуманный пользовательский интерфейс.</p>
-                    
-                    <h6>Технологии:</h6>
-                    <div class="mb-3">
-                        <span class="badge bg-primary me-1">HTML5</span>
-                        <span class="badge bg-primary me-1">CSS3</span>
-                        <span class="badge bg-primary">JavaScript ES6+</span>
-                    </div>
-                    
-                    <h6>Особенности:</h6>
-                    <ul>
-                        <li>Адаптивный дизайн</li>
-                        <li>Интерактивные элементы</li>
-                        <li>Оптимизированная производительность</li>
-                        <li>Семантическая верстка</li>
-                    </ul>
-                    
-                    <h6>Ссылки:</h6>
-                    <div class="d-flex gap-2">
-                        <a href="#" class="btn btn-outline-primary btn-sm">
-                            <i class="bi bi-eye me-1"></i>Демо
-                        </a>
-                        <a href="#" class="btn btn-outline-secondary btn-sm">
-                            <i class="bi bi-github me-1"></i>Исходный код
-                        </a>
-                    </div>
+                <div class="modal-body" id="modalProjectBody">
+                    <!-- Контент модального окна -->
                 </div>
             </div>
         </div>
     </div>
-
-    <!-- Модальное окно проекта 2 -->
-    <div class="modal fade" id="projectModal2" tabindex="-1">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Todo-приложение</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="bg-light rounded p-4 text-center mb-4">
-                        <i class="bi bi-check2-square" style="font-size: 4rem; color: #28a745;"></i>
-                    </div>
-                    <h6>Описание проекта:</h6>
-                    <p>Простое и эффективное приложение для управления задачами. Позволяет добавлять, редактировать, удалять и отмечать задачи как выполненные. Данные сохраняются в локальном хранилище браузера.</p>
-                    
-                    <h6>Технологии:</h6>
-                    <div class="mb-3">
-                        <span class="badge bg-success me-1">JavaScript</span>
-                        <span class="badge bg-success">LocalStorage</span>
-                    </div>
-                    
-                    <h6>Функциональность:</h6>
-                    <ul>
-                        <li>Добавление/удаление задач</li>
-                        <li>Отметка выполненных задач</li>
-                        <li>Фильтрация по статусу</li>
-                        <li>Локальное сохранение данных</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Добавь остальные модальные окна по аналогии -->
 
     <!-- Подвал -->
-    <footer class="bg-dark text-white py-4 mt-5">
+    <footer class="footer">
         <div class="container">
-            <div class="row align-items-center">
-                <div class="col-md-6">
-                    <p class="mb-0">&copy; 2025 Контакты</p>
-                </div>
-                <div class="col-md-6 text-md-end">
-                    <a href="contacts.html" class="text-white text-decoration-none me-3">
-                        <i class="bi bi-envelope me-1"></i>Контакты
-                    </a>
-                    <a href="#" class="text-white text-decoration-none">
-                        <i class="bi bi-github me-1"></i>GitHub
-                    </a>
-                </div>
-            </div>
+            <p>&copy; 2025 Портфолио студента</p>
         </div>
     </footer>
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    
-    <!-- Кастомный JS для фильтрации -->
-    <script>
-        // Фильтрация проектов
-        document.addEventListener('DOMContentLoaded', function() {
-            const filterBtns = document.querySelectorAll('.filter-btn');
-            const projectItems = document.querySelectorAll('.project-item');
-            
-            filterBtns.forEach(btn => {
-                btn.addEventListener('click', function() {
-                    // Убираем активный класс у всех кнопок
-                    filterBtns.forEach(b => b.classList.remove('active'));
-                    // Добавляем активный класс текущей кнопке
-                    this.classList.add('active');
-                    
-                    const filter = this.getAttribute('data-filter');
-                    
-                    // Показываем/скрываем проекты
-                    projectItems.forEach(item => {
-                        if (filter === 'all' || item.getAttribute('data-category') === filter) {
-                            item.style.display = 'block';
-                        } else {
-                            item.style.display = 'none';
-                        }
-                    });
-                });
-            });
-        });
-    </script>
+    <!-- Наш JavaScript -->
+    <script src="../scripts/script.js"></script>
 </body>
 </html>
