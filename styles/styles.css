@@ -1,9 +1,110 @@
-/* Стили для главной страницы */
+/* Тёмная тема - серые тона */
+:root {
+    /* Светлая тема */
+    --primary-purple: #8B5FBF;
+    --light-purple: #E6E6FA;
+    --soft-purple: #F8F7FF;
+    --text-dark: #2D3748;
+    --text-light: #718096;
+    --white: #FFFFFF;
+    --border-light: #E2E8F0;
+    --bg-color: #FFFFFF;
+    --card-bg: #FFFFFF;
+    
+    /* Тёмная тема */
+    --dark-bg: #1a1a1a;
+    --dark-card: #2d2d2d;
+    --dark-text: #e0e0e0;
+    --dark-text-light: #a0a0a0;
+    --dark-border: #404040;
+    --dark-soft-bg: #252525;
+}
+
+/* Тёмная тема */
+[data-theme="dark"] {
+    --bg-color: var(--dark-bg);
+    --card-bg: var(--dark-card);
+    --text-dark: var(--dark-text);
+    --text-light: var(--dark-text-light);
+    --border-light: var(--dark-border);
+    --white: var(--dark-card);
+    --soft-purple: var(--dark-soft-bg);
+    --light-purple: #404040;
+}
+
+/* Общие стили */
+body {
+    background-color: var(--bg-color);
+    color: var(--text-dark);
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    line-height: 1.6;
+    transition: all 0.3s ease;
+}
+
+/* Переключатель темы */
+.theme-switcher {
+    position: relative;
+    margin-left: 1rem;
+}
+
+.theme-toggle {
+    background: none;
+    border: 1px solid var(--border-light);
+    color: var(--text-dark);
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 500;
+}
+
+.theme-toggle:hover {
+    border-color: var(--primary-purple);
+    color: var(--primary-purple);
+}
+
+/* Шапка */
+.header {
+    background: var(--card-bg);
+    border-bottom: 1px solid var(--border-light);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+}
+
+.navbar-brand {
+    color: var(--primary-purple) !important;
+    font-weight: 600;
+    font-size: 1.4rem;
+}
+
+.nav-link {
+    color: var(--text-dark) !important;
+    font-weight: 500;
+    transition: color 0.3s ease;
+    margin: 0 0.5rem;
+}
+
+.nav-link:hover,
+.nav-link.active {
+    color: var(--primary-purple) !important;
+}
+
+/* Основной контент */
+.main {
+    padding: 3rem 0;
+    min-height: 70vh;
+    background: var(--soft-purple);
+    transition: all 0.3s ease;
+}
 
 /* Герой секция */
 .hero {
     padding: 4rem 0;
     background: var(--soft-purple);
+    transition: all 0.3s ease;
 }
 
 .hero-title {
@@ -36,41 +137,36 @@
     font-weight: 500;
     transition: all 0.3s ease;
     cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
 }
 
 .hero-btn:hover {
     background: #7a4da8;
     transform: translateY(-2px);
+    color: var(--white);
 }
 
-.hero-image {
-    padding: 2rem;
-}
-
-.image-placeholder {
-    font-size: 8rem;
-    opacity: 0.8;
-}
 .photo-container {
-    width: 300px; /* Настройте под ваш дизайн */
+    width: 300px;
     height: 300px;
-    border-radius: 50%; /* Для круглой фотографии */
+    border-radius: 50%;
     overflow: hidden;
-    border: 4px solid #fff; /* Рамка вокруг фото */
+    border: 4px solid var(--card-bg);
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    margin-left: auto; /* Это сдвинет контейнер вправо */
-    margin-right: 100px; /* Отступ от правого края */
+    margin-left: auto;
+    margin-right: 100px;
 }
 
 .profile-photo {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Чтобы фото заполнило контейнер */
+    object-fit: cover;
     transition: transform 0.3s ease;
 }
 
 .profile-photo:hover {
-    transform: scale(1.05); /* Легкое увеличение при наведении */
+    transform: scale(1.05);
 }
 
 /* Секции */
@@ -125,7 +221,7 @@
 
 /* Превью проектов */
 .project-preview-card {
-    background: var(--white);
+    background: var(--card-bg);
     border-radius: 12px;
     padding: 2rem;
     text-align: center;
@@ -193,182 +289,9 @@
     transform: translateY(-2px);
 }
 
-/* Адаптивность */
-@media (max-width: 768px) {
-    .hero-title {
-        font-size: 2rem;
-    }
-    
-    .hero-image {
-        padding: 1rem;
-    }
-    
-    .image-placeholder {
-        font-size: 6rem;
-    }
-    
-    .skills-section,
-    .projects-preview {
-        padding: 3rem 0;
-    }
-    
-    .section-title {
-        font-size: 1.8rem;
-    }
-}
-
-.project-actions {
-    margin-top: 15px;
-    text-align: center;
-}
-
-.project-card {
-    cursor: pointer;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.project-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-}
-.modal-project-links {
-    display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
-}
-
-.btn-primary {
-    background-color: #6f42c1;
-    border-color: #6f42c1;
-    color: white;
-    padding: 10px 20px;
-    text-decoration: none;
-    border-radius: 5px;
-    display: inline-block;
-}
-
-.btn-primary:hover {
-    background-color: #5a32a3;
-    border-color: #5a32a3;
-    color: white;
-}
-
-.btn-outline-secondary {
-    border: 2px solid #6c757d;
-    color: #6c757d;
-    background: transparent;
-    padding: 10px 20px;
-    text-decoration: none;
-    border-radius: 5px;
-    display: inline-block;
-}
-
-.btn-outline-secondary:hover {
-    background-color: #6c757d;
-    color: white;
-}
-
-
-
-
-
-
-
-/* Сдержанная фиолетовая палитра */
-:root {
-    --primary-purple: #8B5FBF;
-    --light-purple: #E6E6FA;
-    --soft-purple: #F8F7FF;
-    --text-dark: #2D3748;
-    --text-light: #718096;
-    --white: #FFFFFF;
-    --border-light: #E2E8F0;
-}
-
-/* Общие стили */
-body {
-    background-color: var(--white);
-    color: var(--text-dark);
-    font-family: 'Segoe UI', system-ui, sans-serif;
-    line-height: 1.6;
-}
-
-/* Шапка */
-.header {
-    background: var(--white);
-    border-bottom: 1px solid var(--border-light);
-    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-}
-
-.navbar-brand {
-    color: var(--primary-purple) !important;
-    font-weight: 600;
-    font-size: 1.4rem;
-}
-
-.nav-link {
-    color: var(--text-dark) !important;
-    font-weight: 500;
-    transition: color 0.3s ease;
-    margin: 0 0.5rem;
-}
-
-.nav-link:hover,
-.nav-link.active {
-    color: var(--primary-purple) !important;
-}
-
-/* Основной контент */
-.main {
-    padding: 3rem 0;
-    min-height: 70vh;
-    background: var(--soft-purple);
-}
-
-/* Заголовок страницы проектов */
-.projects-title {
-    text-align: center;
-    margin-bottom: 1rem;
-    color: var(--text-dark);
-    font-weight: 600;
-    font-size: 2.2rem;
-}
-
-.projects-subtitle {
-    text-align: center;
-    color: var(--text-light);
-    margin-bottom: 3rem;
-    font-size: 1.1rem;
-}
-
-/* Фильтры */
-.projects-filters {
-    text-align: center;
-    margin-bottom: 3rem;
-}
-
-.filter-btn {
-    padding: 0.6rem 1.5rem;
-    margin: 0 0.3rem;
-    border: 1px solid var(--border-light);
-    background: var(--white);
-    color: var(--text-dark);
-    border-radius: 20px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    font-weight: 500;
-}
-
-.filter-btn.active,
-.filter-btn:hover {
-    background: var(--primary-purple);
-    color: var(--white);
-    border-color: var(--primary-purple);
-}
-
 /* Карточки проектов */
 .project-card {
-    background: var(--white);
+    background: var(--card-bg);
     border-radius: 12px;
     padding: 1.5rem;
     box-shadow: 0 2px 8px rgba(0,0,0,0.08);
@@ -430,15 +353,42 @@ body {
     font-size: 0.85rem;
 }
 
-/* Модальное окно */
+/* Фильтры */
+.projects-filters {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.filter-btn {
+    padding: 0.6rem 1.5rem;
+    margin: 0 0.3rem;
+    border: 1px solid var(--border-light);
+    background: var(--card-bg);
+    color: var(--text-dark);
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 500;
+}
+
+.filter-btn.active,
+.filter-btn:hover {
+    background: var(--primary-purple);
+    color: var(--white);
+    border-color: var(--primary-purple);
+}
+
+/* Модальные окна */
 .modal-content {
     border: none;
     border-radius: 12px;
     box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    background: var(--card-bg);
+    color: var(--text-dark);
 }
 
 .modal-header {
-    background: var(--white);
+    background: var(--card-bg);
     color: var(--text-dark);
     border-bottom: 1px solid var(--border-light);
     padding: 1.2rem 1.5rem;
@@ -451,71 +401,58 @@ body {
 
 .modal-body {
     padding: 1.5rem;
-    background: var(--white);
+    background: var(--card-bg);
 }
 
-.modal-project-content {
-    text-align: left;
-}
-
-.modal-project-icon {
-    font-size: 3rem;
-    margin-bottom: 1.5rem;
-    text-align: center;
-    color: var(--primary-purple);
-}
-
-.modal-project-content p {
-    margin-bottom: 1rem;
-    line-height: 1.6;
-    color: var(--text-dark);
-}
-
-.modal-project-content strong {
-    color: var(--primary-purple);
+.btn-close {
+    filter: invert(0.5);
 }
 
 .modal-project-links {
-    margin-top: 2rem;
     display: flex;
-    gap: 1rem;
+    gap: 10px;
+    flex-wrap: wrap;
     justify-content: center;
 }
 
 .btn-primary {
-    background: var(--primary-purple);
-    border: none;
-    border-radius: 8px;
-    padding: 0.6rem 1.5rem;
-    font-weight: 500;
-    transition: all 0.3s ease;
+    background-color: #6f42c1;
+    border-color: #6f42c1;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    display: inline-block;
 }
 
 .btn-primary:hover {
-    background: #7a4da8;
-    transform: translateY(-1px);
+    background-color: #5a32a3;
+    border-color: #5a32a3;
+    color: white;
 }
 
 .btn-outline-secondary {
-    border: 1px solid var(--border-light);
+    border: 2px solid var(--border-light);
     color: var(--text-dark);
-    border-radius: 8px;
-    padding: 0.6rem 1.5rem;
-    font-weight: 500;
-    transition: all 0.3s ease;
+    background: transparent;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    display: inline-block;
 }
 
 .btn-outline-secondary:hover {
-    border-color: var(--primary-purple);
-    color: var(--primary-purple);
+    background-color: var(--border-light);
+    color: var(--text-dark);
 }
 
 /* Подвал */
 .footer {
-    background: var(--white);
+    background: var(--card-bg);
     color: var(--text-dark);
     padding: 2rem 0;
     border-top: 1px solid var(--border-light);
+    transition: all 0.3s ease;
 }
 
 .footer p {
@@ -524,83 +461,26 @@ body {
     color: var(--text-light);
 }
 
-/* Адаптивность */
-@media (max-width: 768px) {
-    .projects-filters {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 0.5rem;
-    }
-    
-    .filter-btn {
-        margin: 0.1rem;
-        padding: 0.5rem 1rem;
-        font-size: 0.85rem;
-    }
-    
-    .modal-project-links {
-        flex-direction: column;
-        align-items: center;
-    }
-    
-    .project-card {
-        padding: 1.2rem;
-    }
-    
-    .projects-title {
-        font-size: 1.8rem;
-    }
-}
-
-/* Анимация появления карточек */
-.project-item {
-    animation: fadeInUp 0.5s ease-out;
-}
-
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-
-
-
-
-
-
-
-/* Стили для страницы дневника */
-/* Стили для страницы дневника */
-
-.diary-title {
-    text-align: center;
-    font-size: 2.2rem;
-    font-weight: 600;
+/* Формы */
+.form-control {
+    background: var(--card-bg);
+    border: 1px solid var(--border-light);
     color: var(--text-dark);
-    margin-bottom: 1rem;
+    border-radius: 8px;
+    padding: 0.75rem;
+    transition: all 0.3s ease;
 }
 
-.diary-subtitle {
-    text-align: center;
-    color: var(--text-light);
-    margin-bottom: 3rem;
-    font-size: 1.1rem;
+.form-control:focus {
+    border-color: var(--primary-purple);
+    box-shadow: 0 0 0 0.2rem rgba(139, 95, 191, 0.1);
+    background: var(--card-bg);
+    color: var(--text-dark);
 }
 
 /* Записи дневника */
-.diary-entries {
-    margin-bottom: 2rem;
-}
-
 .diary-entry {
-    background: var(--white);
+    background: var(--card-bg);
     border-radius: 12px;
     padding: 1.5rem;
     margin-bottom: 1rem;
@@ -616,405 +496,235 @@ body {
     transform: translateX(5px);
 }
 
-.entry-icon {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: bold;
-    flex-shrink: 0;
-}
-
-.diary-entry.completed .entry-icon {
-    background: var(--light-purple);
-    color: var(--primary-purple);
-}
-
-.diary-entry.in-progress .entry-icon {
-    background: #fff3cd;
-    color: #856404;
-}
-
-.diary-entry.planned .entry-icon {
-    background: #e2e3e5;
-    color: #6c757d;
-}
-
-.entry-content {
-    flex: 1;
-}
-
-.entry-content h3 {
-    color: var(--text-dark);
-    margin-bottom: 0.5rem;
-    font-weight: 600;
-    font-size: 1.1rem;
-}
-
-.entry-content p {
-    color: var(--text-light);
-    margin-bottom: 0.5rem;
-    line-height: 1.5;
-}
-
-.entry-date {
-    color: var(--text-light);
-    font-size: 0.85rem;
-}
-
-/* Текущие курсы */
-.current-courses {
-    background: var(--white);
-    border-radius: 12px;
-    padding: 1.5rem;
-    border: 1px solid var(--border-light);
-    position: sticky;
-    top: 2rem;
-}
-
-.courses-title {
-    color: var(--text-dark);
-    margin-bottom: 1.5rem;
-    font-weight: 600;
-    text-align: center;
-}
-
-.course-item {
-    margin-bottom: 1.5rem;
-}
-
-.course-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 0.5rem;
-}
-
-.course-name {
-    font-weight: 500;
-    color: var(--text-dark);
-}
-
-.course-percent {
-    color: var(--primary-purple);
-    font-weight: 600;
-    font-size: 0.9rem;
-}
-
-/* Прогресс-бары - ПРОСТО ЗАПОЛНЕННЫЕ */
-.progress {
-    height: 8px;
-    background: var(--border-light);
-    border-radius: 4px;
-    overflow: hidden;
-}
-
-.progress-bar {
-    height: 100%;
-    background: var(--primary-purple);
-    border-radius: 4px;
-    /* Просто заполненные полосы */
-}
-
-.add-entry-btn {
-    width: 100%;
-    background: var(--primary-purple);
-    color: var(--white);
-    border: none;
-    padding: 0.8rem;
-    border-radius: 8px;
-    font-weight: 500;
-    transition: all 0.3s ease;
-    cursor: pointer;
-    margin-top: 1rem;
-}
-
-.add-entry-btn:hover {
-    background: #7a4da8;
-    transform: translateY(-2px);
-}
-
-/* Модальное окно */
-.modal-content {
-    border: none;
-    border-radius: 12px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-}
-
-.modal-header {
-    background: var(--white);
-    color: var(--text-dark);
-    border-bottom: 1px solid var(--border-light);
-    padding: 1.2rem 1.5rem;
-}
-
-.modal-title {
-    font-weight: 600;
-    color: var(--text-dark);
-}
-
-.modal-body {
-    padding: 1.5rem;
-}
-
-.form-control {
-    border: 1px solid var(--border-light);
-    border-radius: 8px;
-    padding: 0.75rem;
-    transition: all 0.3s ease;
-}
-
-.form-control:focus {
-    border-color: var(--primary-purple);
-    box-shadow: 0 0 0 0.2rem rgba(139, 95, 191, 0.1);
-}
-
-.modal-footer {
-    border-top: 1px solid var(--border-light);
-    padding: 1rem 1.5rem;
-}
-
-.btn {
-    padding: 0.6rem 1.5rem;
-    border-radius: 8px;
-    font-weight: 500;
-    transition: all 0.3s ease;
-}
-
-.btn-primary {
-    background: var(--primary-purple);
-    border: none;
-}
-
-.btn-primary:hover {
-    background: #7a4da8;
-}
-
-.btn-secondary {
-    background: var(--white);
-    border: 1px solid var(--border-light);
-    color: var(--text-dark);
-}
-
-.btn-secondary:hover {
-    background: var(--border-light);
-}
-
-/* Адаптивность */
-@media (max-width: 768px) {
-    .diary-title {
-        font-size: 1.8rem;
-    }
-    
-    .diary-entry {
-        padding: 1rem;
-        flex-direction: column;
-        text-align: center;
-    }
-    
-    .entry-icon {
-        align-self: center;
-    }
-    
-    .current-courses {
-        position: static;
-        margin-top: 2rem;
-    }
-}
-
-
-
-
-
-
-
-
-/* Стили для страницы контактов */
-
-.contacts-title {
-    text-align: center;
-    font-size: 2.2rem;
-    font-weight: 600;
-    color: var(--text-dark);
-    margin-bottom: 1rem;
-}
-
-.contacts-subtitle {
-    text-align: center;
-    color: var(--text-light);
-    margin-bottom: 3rem;
-    font-size: 1.1rem;
-}
-
-/* Форма обратной связи */
-.contact-form {
-    background: var(--white);
-    border-radius: 12px;
-    padding: 2rem;
-    border: 1px solid var(--border-light);
-    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-}
-
-.contact-form .form-group {
-    margin-bottom: 1.5rem;
-}
-
-.contact-form label {
-    display: block;
-    margin-bottom: 0.5rem;
-    font-weight: 600;
-    color: var(--text-dark);
-}
-
-.contact-form .form-control {
-    width: 100%;
-    padding: 0.75rem;
-    border: 1px solid var(--border-light);
-    border-radius: 8px;
-    font-size: 1rem;
-    transition: all 0.3s ease;
-    box-sizing: border-box;
-}
-
-.contact-form .form-control:focus {
-    outline: none;
-    border-color: var(--primary-purple);
-    box-shadow: 0 0 0 0.2rem rgba(139, 95, 191, 0.1);
-}
-
-.contact-form textarea.form-control {
-    min-height: 120px;
-    resize: vertical;
-}
-
-.submit-btn {
-    width: 100%;
-    background: var(--primary-purple);
-    color: var(--white);
-    border: none;
-    padding: 0.8rem;
-    border-radius: 8px;
-    font-size: 1rem;
-    font-weight: 500;
-    transition: all 0.3s ease;
-    cursor: pointer;
-}
-
-.submit-btn:hover {
-    background: #7a4da8;
-    transform: translateY(-2px);
-}
-
 /* Контактная информация */
-.contact-info {
-    background: var(--white);
+.contact-form,
+.contact-info,
+.current-courses {
+    background: var(--card-bg);
     border-radius: 12px;
     padding: 2rem;
     border: 1px solid var(--border-light);
     box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-    position: sticky;
-    top: 2rem;
-}
-
-.contact-info-title {
-    color: var(--text-dark);
-    margin-bottom: 1.5rem;
-    font-weight: 600;
-    text-align: center;
-}
-
-.contact-item {
-    display: flex;
-    align-items: flex-start;
-    gap: 1rem;
-    margin-bottom: 1.5rem;
-    padding-bottom: 1.5rem;
-    border-bottom: 1px solid var(--border-light);
-}
-
-.contact-item:last-child {
-    margin-bottom: 0;
-    padding-bottom: 0;
-    border-bottom: none;
-}
-
-.contact-icon {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background: var(--light-purple);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.2rem;
-    flex-shrink: 0;
-}
-
-.contact-details {
-    flex: 1;
-}
-
-.contact-details strong {
-    display: block;
-    color: var(--text-dark);
-    margin-bottom: 0.25rem;
-    font-weight: 600;
-}
-
-.contact-details p {
-    color: var(--text-light);
-    margin: 0;
-    line-height: 1.4;
-}
-
-/* Валидация формы */
-.contact-form .form-control:invalid {
-    border-color: #e74c3c;
-}
-
-.contact-form .form-control:valid {
-    border-color: #27ae60;
 }
 
 /* Адаптивность */
 @media (max-width: 768px) {
-    .contacts-title {
+    .hero-title {
+        font-size: 2rem;
+    }
+    
+    .photo-container {
+        margin: 0 auto;
+        width: 250px;
+        height: 250px;
+    }
+    
+    .skills-section,
+    .projects-preview {
+        padding: 3rem 0;
+    }
+    
+    .section-title {
         font-size: 1.8rem;
     }
     
-    .contact-form,
-    .contact-info {
-        padding: 1.5rem;
-    }
-    
-    .contact-info {
-        position: static;
-        margin-top: 2rem;
-    }
-    
-    .contact-item {
-        flex-direction: column;
-        text-align: center;
+    .projects-filters {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
         gap: 0.5rem;
     }
     
-    .contact-icon {
-        align-self: center;
+    .filter-btn {
+        margin: 0.1rem;
+        padding: 0.5rem 1rem;
+        font-size: 0.85rem;
     }
 }
 
-/* Анимация при фокусе */
-@keyframes inputFocus {
-    from {
-        transform: scale(1);
-    }
-    to {
-        transform: scale(1.02);
-    }
+.project-actions {
+    margin-top: 15px;
+    text-align: center;
+}
+/* Специфичные стили для кнопок на странице контактов и дневника */
+.submit-btn,
+.add-entry-btn,
+.btn-primary {
+    background: var(--primary-purple) !important;
+    color: var(--white) !important;
+    border: none !important;
+    padding: 0.8rem 1.5rem !important;
+    border-radius: 8px !important;
+    font-weight: 500 !important;
+    transition: all 0.3s ease !important;
+    cursor: pointer !important;
+    text-decoration: none !important;
+    display: inline-block !important;
 }
 
-.contact-form .form-control:focus {
-    animation: inputFocus 0.2s ease-out;
+.submit-btn:hover,
+.add-entry-btn:hover,
+.btn-primary:hover {
+    background: #7a4da8 !important;
+    transform: translateY(-2px) !important;
+    color: var(--white) !important;
+}
+
+/* Стили для кнопок в модальных окнах дневника */
+.modal-footer .btn-primary {
+    background: var(--primary-purple) !important;
+    border: none !important;
+    color: var(--white) !important;
+}
+
+.modal-footer .btn-secondary {
+    background: var(--card-bg) !important;
+    border: 1px solid var(--border-light) !important;
+    color: var(--text-dark) !important;
+}
+
+.modal-footer .btn-secondary:hover {
+    background: var(--border-light) !important;
+    color: var(--text-dark) !important;
+}
+
+/* Стили для формы контактов */
+.contact-form .form-group label {
+    color: var(--text-dark) !important;
+    font-weight: 600 !important;
+}
+
+.contact-info .contact-details strong {
+    color: var(--text-dark) !important;
+}
+
+.contact-info .contact-details p {
+    color: var(--text-light) !important;
+}
+
+/* Стили для дневника */
+.diary-title,
+.contacts-title {
+    color: var(--text-dark) !important;
+}
+
+.diary-subtitle,
+.contacts-subtitle {
+    color: var(--text-light) !important;
+}
+
+.entry-content h3 {
+    color: var(--text-dark) !important;
+}
+
+.entry-content p {
+    color: var(--text-light) !important;
+}
+
+.courses-title,
+.contact-info-title {
+    color: var(--text-dark) !important;
+}
+
+/* Стили для прогресс-баров в дневнике */
+.course-name {
+    color: var(--text-dark) !important;
+}
+
+.course-percent {
+    color: var(--primary-purple) !important;
+}
+/* Исправление стилей модальных окон */
+.modal-content {
+    background: var(--card-bg) !important;
+    color: var(--text-dark) !important;
+}
+
+.modal-header {
+    background: var(--card-bg) !important;
+    border-bottom: 1px solid var(--border-light) !important;
+}
+
+.modal-title {
+    color: var(--text-dark) !important;
+}
+
+.modal-body {
+    background: var(--card-bg) !important;
+}
+
+.modal-footer {
+    background: var(--card-bg) !important;
+    border-top: 1px solid var(--border-light) !important;
+}
+
+/* Стили для select в модальных окнах */
+.form-control,
+.form-select {
+    background: var(--card-bg) !important;
+    border: 1px solid var(--border-light) !important;
+    color: var(--text-dark) !important;
+}
+
+.form-control:focus,
+.form-select:focus {
+    background: var(--card-bg) !important;
+    border-color: var(--primary-purple) !important;
+    color: var(--text-dark) !important;
+    box-shadow: 0 0 0 0.2rem rgba(139, 95, 191, 0.1) !important;
+}
+/* Исправление кнопки в дневнике */
+.add-entry-btn {
+    padding: 0.6rem 1rem !important;
+    font-size: 0.9rem !important;
+    margin-top: 1rem !important;
+    width: 100% !important;
+    background: var(--primary-purple) !important;
+    color: var(--white) !important;
+    border: none !important;
+    border-radius: 8px !important;
+    font-weight: 500 !important;
+    transition: all 0.3s ease !important;
+    cursor: pointer !important;
+}
+
+.add-entry-btn:hover {
+    background: #7a4da8 !important;
+    transform: translateY(-1px) !important;
+}
+
+/* Увеличим отступы у прогресс-баров чтобы кнопка не залезала */
+.current-courses {
+    padding-bottom: 1.5rem !important;
+}
+
+.course-item {
+    margin-bottom: 1.2rem !important;
+}
+
+.course-item:last-child {
+    margin-bottom: 0.5rem !important;
+}
+/* Полное отключение анимаций тряски */
+.modal {
+    padding-right: 0 !important;
+}
+
+body.modal-open {
+    padding-right: 0 !important;
+    overflow: hidden;
+}
+
+.modal-backdrop {
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+/* Отключаем все transition для модальных окон */
+.modal.fade .modal-dialog {
+    transition: none;
+}
+
+.modal-content {
+    border: none;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
 }

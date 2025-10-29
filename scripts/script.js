@@ -1,4 +1,34 @@
+
+// Управление тёмной темой
+function initTheme() {
+    const theme = localStorage.getItem('theme') || 'light';
+    document.documentElement.setAttribute('data-theme', theme);
+    updateThemeButton(theme);
+}
+
+function toggleTheme() {
+    const currentTheme = document.documentElement.getAttribute('data-theme');
+    const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+    
+    document.documentElement.setAttribute('data-theme', newTheme);
+    localStorage.setItem('theme', newTheme);
+    updateThemeButton(newTheme);
+}
+
+function updateThemeButton(theme) {
+    const themeToggle = document.querySelector('.theme-toggle');
+    if (themeToggle) {
+        const icon = theme === 'light' ? '🌙' : '☀️';
+        const text = theme === 'light' ? 'Тёмная' : 'Светлая';
+        themeToggle.innerHTML = `${icon} ${text}`;
+    }
+}
 // Данные проектов
+// Добавьте вызов в DOMContentLoaded
+document.addEventListener('DOMContentLoaded', function() {
+    initTheme();
+    // ... остальной ваш код
+});
 const projectsData = [
     {
         id: 1,
