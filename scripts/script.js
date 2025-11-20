@@ -1,4 +1,3 @@
-
 // Управление тёмной темой
 function initTheme() {
     const theme = localStorage.getItem('theme') || 'light';
@@ -23,12 +22,22 @@ function updateThemeButton(theme) {
         themeToggle.innerHTML = `${icon} ${text}`;
     }
 }
+
+// Мобильное меню
+function initMobileMenu() {
+    const toggle = document.querySelector('.nav__toggle');
+    const menu = document.querySelector('.nav__menu');
+    
+    if (toggle && menu) {
+        toggle.addEventListener('click', () => {
+            const isExpanded = toggle.getAttribute('aria-expanded') === 'true';
+            toggle.setAttribute('aria-expanded', !isExpanded);
+            menu.classList.toggle('nav__menu--active');
+        });
+    }
+}
+
 // Данные проектов
-// Добавьте вызов в DOMContentLoaded
-document.addEventListener('DOMContentLoaded', function() {
-    initTheme();
-    // ... остальной ваш код
-});
 const projectsData = [
     {
         id: 1,
@@ -51,7 +60,7 @@ const projectsData = [
         details: "Простой и чистый одностраничный сайт, созданный для отработки навыков вёрстки и освоения базовых принципов веб-дизайна.",
         icon: "✅",
         date: "Сентябрь 2025",
-        demoLink: "https://evenysh.github.io/four_rules_of_layout/", // ← ИСПРАВЬТЕ НА demoLink
+        demoLink: "https://evenysh.github.io/four_rules_of_layout/",
         githubLink: "https://github.com/Evenysh/four_rules_of_layout"
     },
     {
@@ -98,88 +107,29 @@ const projectsData = [
     }
 ];
 
-// Базовые функции для главной страницы
-document.addEventListener('DOMContentLoaded', function() {
-    // Анимация прогресс-баров
-    const progressBars = document.querySelectorAll('.progress-bar');
-    
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const width = entry.target.style.width;
-                entry.target.style.width = '0%';
-                setTimeout(() => {
-                    entry.target.style.width = width;
-                }, 300);
-            }
-        });
-    }, { threshold: 0.5 });
-
-    progressBars.forEach(bar => observer.observe(bar));
-    
-    // Обработчик кнопки скачивания резюме
-    const downloadBtn = document.querySelector('.hero-btn');
-    if (downloadBtn) {
-        downloadBtn.addEventListener('click', function() {
-            // Простое скачивание без создания DOM-элементов
-            const url = 'resume.pdf';
-            const fileName = 'resume.pdf';
-            
-            fetch(url)
-                .then(response => response.blob())
-                .then(blob => {
-                    const url = window.URL.createObjectURL(blob);
-                    const a = document.createElement('a');
-                    a.style.display = 'none';
-                    a.href = url;
-                    a.download = fileName;
-                    document.body.appendChild(a);
-                    a.click();
-                    window.URL.revokeObjectURL(url);
-                    document.body.removeChild(a);
-                })
-                .catch(() => {
-                    // Если fetch не работает, используем fallback
-                    window.location.href = url;
-                });
-        });
-    }
-    
-    // Загружаем проекты на главную страницу
-    if (document.getElementById('homeProjectsContainer')) {
-        renderHomepageProjects();
-    }
-    
-    // Инициализация фильтров на странице проектов
-    if (document.getElementById('projectsGrid')) {
-        renderProjects();
-        setupFilters();
-    }
-});
-
 // Функция для отображения проектов на главной странице
 function renderHomepageProjects() {
     const container = document.getElementById('homeProjectsContainer');
-    const featuredProjects = projectsData.slice(0, 3); // Показываем первые 3 проекта
+    if (!container) return;
+    
+    const featuredProjects = projectsData.slice(0, 3);
     
     container.innerHTML = featuredProjects.map(project => `
-        <div class="col-md-4">
-            <div class="project-preview-card" onclick="openProjectModal(${project.id})" style="cursor: pointer;">
-                <div class="preview-icon">${project.icon}</div>
-                <h3>${project.title}</h3>
-                <p>${project.description}</p>
-                <div class="tech-tags">
-                    ${project.technologies.map(tech => 
-                        `<span class="tech-tag">${tech}</span>`
-                    ).join('')}
-                </div>
-                <div class="project-actions mt-3">
-                    <button class="btn btn-primary btn-sm" onclick="event.stopPropagation(); openProjectModal(${project.id})">
-                        Подробнее
-                    </button>
-                </div>
+        <article class="project-card" onclick="openProjectModal(${project.id})">
+            <div class="project-card__icon">${project.icon}</div>
+            <h3 class="project-card__title">${project.title}</h3>
+            <p class="project-card__description">${project.description}</p>
+            <div class="project-card__tech">
+                ${project.technologies.map(tech => 
+                    `<span class="tech-tag">${tech}</span>`
+                ).join('')}
             </div>
-        </div>
+            <div class="project-card__actions">
+                <button class="btn btn--primary" onclick="event.stopPropagation(); openProjectModal(${project.id})">
+                    Подробнее
+                </button>
+            </div>
+        </article>
     `).join('');
 }
 
@@ -193,22 +143,26 @@ function renderProjects(filter = 'all') {
         : projectsData.filter(project => project.category === filter);
     
     grid.innerHTML = filteredProjects.map(project => `
-        <div class="col-lg-4 col-md-6 project-item" data-category="${project.category}">
-            <div class="project-card" onclick="openProjectModal(${project.id})" style="cursor: pointer;">
-                <div class="project-icon">${project.icon}</div>
-                <h3 class="project-title">${project.title}</h3>
-                <p class="project-description">${project.description}</p>
-                <div class="project-tech">
-                    ${project.technologies.map(tech => 
-                        `<span class="tech-badge">${tech}</span>`
-                    ).join('')}
-                </div>
-                <div class="project-date">${project.date}</div>
+        <article class="project-card" onclick="openProjectModal(${project.id})">
+            <div class="project-card__icon">${project.icon}</div>
+            <h3 class="project-card__title">${project.title}</h3>
+            <p class="project-card__description">${project.description}</p>
+            <div class="project-card__tech">
+                ${project.technologies.map(tech => 
+                    `<span class="tech-tag">${tech}</span>`
+                ).join('')}
             </div>
-        </div>
+            <div class="project-card__category">
+                <span class="category-badge category-${project.category}">${project.category}</span>
+            </div>
+            <div class="project-card__actions">
+                <button class="btn btn--primary" onclick="event.stopPropagation(); openProjectModal(${project.id})">
+                    Подробнее
+                </button>
+            </div>
+        </article>
     `).join('');
 }
-
 
 // Функция для открытия модального окна
 function openProjectModal(projectId) {
@@ -217,37 +171,40 @@ function openProjectModal(projectId) {
     
     document.getElementById('modalProjectTitle').textContent = project.title;
     
-    // Создаем кнопки независимо от проверок
     let demoButton = '';
     let githubButton = '';
     
-    // Кнопка "Посмотреть демо" - всегда показываем если есть ссылка
     if (project.demoLink && project.demoLink !== '#' && project.demoLink.trim() !== '') {
-        demoButton = `<a href="${project.demoLink}" target="_blank" class="btn btn-primary me-2">Посмотреть демо</a>`;
+        demoButton = `<a href="${project.demoLink}" target="_blank" class="btn btn--primary">Посмотреть демо</a>`;
     }
     
-    // Кнопка "Исходный код"
     if (project.githubLink && project.githubLink !== '#' && project.githubLink.trim() !== '') {
-        githubButton = `<a href="${project.githubLink}" target="_blank" class="btn btn-outline-secondary">Исходный код</a>`;
+        githubButton = `<a href="${project.githubLink}" target="_blank" class="btn btn--outline">Исходный код</a>`;
     }
     
     document.getElementById('modalProjectBody').innerHTML = `
-        <div class="modal-project-content">
-            <div class="modal-project-icon text-center mb-3" style="font-size: 3rem;">${project.icon}</div>
+        <div class="modal-project">
+            <div class="modal-project__icon">${project.icon}</div>
             <p><strong>Описание:</strong> ${project.details}</p>
             <p><strong>Технологии:</strong> ${project.technologies.join(', ')}</p>
+            <p><strong>Категория:</strong> <span class="category-badge category-${project.category}">${project.category}</span></p>
             <p><strong>Дата создания:</strong> ${project.date}</p>
-            <div class="modal-project-links mt-4">
+            <div class="modal-project__links">
                 ${demoButton}
                 ${githubButton}
             </div>
         </div>
     `;
     
-    // Открываем модальное окно
-    const projectModal = new bootstrap.Modal(document.getElementById('projectModal'));
-    projectModal.show();
+    document.getElementById('projectModal').classList.add('modal--active');
+    document.body.style.overflow = 'hidden';
 }
+
+function closeProjectModal() {
+    document.getElementById('projectModal').classList.remove('modal--active');
+    document.body.style.overflow = 'auto';
+}
+
 // Фильтрация проектов
 function setupFilters() {
     const filterBtns = document.querySelectorAll('.filter-btn');
@@ -261,29 +218,18 @@ function setupFilters() {
     });
 }
 
-// Инициализация
-document.addEventListener('DOMContentLoaded', function() {
-    renderProjects();
-    setupFilters();
-});
-
-
-
-
-
-
-
-
-// ==================== ФУНКЦИИ ДЛЯ ДНЕВНИКА ====================
 // ==================== ФУНКЦИИ ДЛЯ ДНЕВНИКА ====================
 
-// Открыть модальное окно добавления записи
 function openAddEntryModal() {
-    const modal = new bootstrap.Modal(document.getElementById('addEntryModal'));
-    modal.show();
+    document.getElementById('addEntryModal').classList.add('modal--active');
+    document.body.style.overflow = 'hidden';
 }
 
-// Добавить новую запись
+function closeAddEntryModal() {
+    document.getElementById('addEntryModal').classList.remove('modal--active');
+    document.body.style.overflow = 'auto';
+}
+
 function addNewEntry() {
     const title = document.getElementById('entryTitle').value;
     const description = document.getElementById('entryDescription').value;
@@ -294,55 +240,16 @@ function addNewEntry() {
         return;
     }
     
-    const newEntry = {
-        title,
-        description,
-        status,
-        date: new Date().toLocaleDateString('ru-RU')
-    };
-    
-    console.log('Новая запись:', newEntry);
-    
-    const modal = bootstrap.Modal.getInstance(document.getElementById('addEntryModal'));
-    modal.hide();
+    alert(`Запись "${title}" добавлена!`);
+    closeAddEntryModal();
     document.getElementById('addEntryForm').reset();
-    alert('Запись успешно добавлена!');
 }
-
-// Инициализация страницы дневника
-function initDiaryPage() {
-    // Добавляем обработчики для модального окна
-    const addEntryForm = document.getElementById('addEntryForm');
-    if (addEntryForm) {
-        addEntryForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            addNewEntry();
-        });
-    }
-}
-
-// ==================== АВТОМАТИЧЕСКАЯ ИНИЦИАЛИЗАЦИЯ ====================
-
-// Запускаем только если мы на странице дневника
-if (window.location.pathname.includes('diary.html') || 
-    document.querySelector('.diary-title')) {
-    
-    document.addEventListener('DOMContentLoaded', initDiaryPage);
-}
-
-
-
-
-
-
 
 // ==================== ФУНКЦИИ ДЛЯ КОНТАКТОВ ====================
 
-// Обработка отправки формы контактов
 function handleContactSubmit(event) {
     event.preventDefault();
     
-    // Получаем данные формы
     const formData = {
         name: document.getElementById('name').value,
         email: document.getElementById('email').value,
@@ -350,133 +257,55 @@ function handleContactSubmit(event) {
         message: document.getElementById('message').value
     };
     
-    // Простая валидация
     if (!formData.name || !formData.email || !formData.message) {
         alert('Пожалуйста, заполните все обязательные поля (отмечены *)');
         return;
     }
     
-    // Валидация email
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(formData.email)) {
         alert('Пожалуйста, введите корректный email адрес');
         return;
     }
     
-    // В реальном приложении здесь был бы AJAX запрос на сервер
-    console.log('Данные формы:', formData);
-    
-    // Показываем сообщение об успехе
     alert('Спасибо! Ваше сообщение отправлено. Я свяжусь с вами в ближайшее время.');
-    
-    // Очищаем форму
     document.getElementById('contactForm').reset();
 }
 
-// Копирование контактной информации
-function setupContactCopy() {
-    const contactItems = document.querySelectorAll('.contact-item');
-    
-    contactItems.forEach(item => {
-        item.style.cursor = 'pointer';
-        item.addEventListener('click', function() {
-            const text = this.querySelector('p').textContent;
-            copyToClipboard(text);
-        });
-    });
-}
+// ==================== ОБЩАЯ ИНИЦИАЛИЗАЦИЯ ====================
 
-// Функция копирования в буфер обмена
-function copyToClipboard(text) {
-    navigator.clipboard.writeText(text).then(() => {
-        // Показываем временное уведомление
-        showCopyNotification('Текст скопирован: ' + text);
-    }).catch(err => {
-        console.error('Ошибка копирования: ', err);
-        // Fallback для старых браузеров
-        const textArea = document.createElement('textarea');
-        textArea.value = text;
-        document.body.appendChild(textArea);
-        textArea.select();
-        document.execCommand('copy');
-        document.body.removeChild(textArea);
-        showCopyNotification('Текст скопирован: ' + text);
-    });
-}
-
-// Показ уведомления о копировании
-function showCopyNotification(message) {
-    // Создаем элемент уведомления
-    const notification = document.createElement('div');
-    notification.textContent = message;
-    notification.style.cssText = `
-        position: fixed;
-        top: 20px;
-        right: 20px;
-        background: var(--primary-purple);
-        color: white;
-        padding: 1rem 1.5rem;
-        border-radius: 8px;
-        z-index: 10000;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-        animation: slideIn 0.3s ease-out;
-    `;
+document.addEventListener('DOMContentLoaded', function() {
+    initTheme();
+    initMobileMenu();
     
-    document.body.appendChild(notification);
+    // Главная страница
+    if (document.getElementById('homeProjectsContainer')) {
+        renderHomepageProjects();
+    }
     
-    // Удаляем уведомление через 3 секунды
-    setTimeout(() => {
-        notification.style.animation = 'slideOut 0.3s ease-in';
+    // Страница проектов
+    if (document.getElementById('projectsGrid')) {
+        renderProjects();
+        setupFilters();
+    }
+    
+    // Страница контактов
+    if (document.getElementById('contactForm')) {
+        document.getElementById('contactForm').addEventListener('submit', handleContactSubmit);
+    }
+    
+    // Анимация прогресс-баров
+    const progressBars = document.querySelectorAll('.skill-progress-bar, .course-progress-bar');
+    progressBars.forEach(bar => {
+        const width = bar.style.width;
+        bar.style.width = '0%';
         setTimeout(() => {
-            document.body.removeChild(notification);
+            bar.style.width = width;
         }, 300);
-    }, 3000);
-}
-
-// Анимации для уведомлений
-const style = document.createElement('style');
-style.textContent = `
-    @keyframes slideIn {
-        from {
-            transform: translateX(100%);
-            opacity: 0;
-        }
-        to {
-            transform: translateX(0);
-            opacity: 1;
-        }
-    }
-    
-    @keyframes slideOut {
-        from {
-            transform: translateX(0);
-            opacity: 1;
-        }
-        to {
-            transform: translateX(100%);
-            opacity: 0;
-        }
-    }
-`;
-document.head.appendChild(style);
-
-// Инициализация страницы контактов
-function initContactsPage() {
-    // Настраиваем обработчик формы
-    const contactForm = document.getElementById('contactForm');
-    if (contactForm) {
-        contactForm.addEventListener('submit', handleContactSubmit);
-    }
-    
-    // Настраиваем копирование контактов
-    setupContactCopy();
-}
-
-// ==================== АВТОМАТИЧЕСКАЯ ИНИЦИАЛИЗАЦИЯ ====================
-
-// Запускаем только если мы на странице контактов
-if (window.location.pathname.includes('contacts.html') || 
-    document.querySelector('.contacts-title')) {
-    
-    document.addEventListener('DOMContentLoaded', initContactsPage);
-}
+    });
+});
+document.addEventListener('DOMContentLoaded', function() {
+    initTheme();
+    initMobileMenu(); // ← ЭТА СТРОКА ДОЛЖНА БЫТЬ!
+    // ... остальной код
+});

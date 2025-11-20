@@ -2,52 +2,162 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <title>Учебный дневник - Портфолио Студента</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../styles/styles.css">
+    <link rel="icon" href="../favicon.ico" type="image/x-icon">
+    <style>
+        /* СТИЛИ ДЛЯ МОБИЛЬНОГО МЕНЮ */
+        .nav__toggle {
+            display: none;
+            flex-direction: column;
+            background: none;
+            border: 2px solid var(--text-color, #333);
+            cursor: pointer;
+            padding: 10px;
+            width: 40px;
+            height: 40px;
+            justify-content: center;
+            align-items: center;
+            position: absolute;
+            right: 20px;
+            top: 15px;
+            z-index: 1001;
+        }
+
+        .nav__toggle-bar {
+            width: 25px;
+            height: 3px;
+            background: var(--text-color, #333);
+            margin: 2px 0;
+            transition: 0.3s;
+        }
+
+        /* Мобильные стили */
+        @media (max-width: 768px) {
+            .nav__toggle {
+                display: flex !important;
+            }
+
+            .nav__menu {
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: var(--bg-color, white);
+                flex-direction: column;
+                padding: 80px 20px 20px 20px;
+                display: none;
+                z-index: 1000;
+                overflow-y: auto;
+            }
+
+            .nav__menu--active {
+                display: flex !important;
+            }
+
+            .nav__list {
+                flex-direction: column;
+                width: 100%;
+                gap: 0;
+            }
+
+            .nav__item {
+                margin: 0;
+                width: 100%;
+            }
+
+            .nav__link {
+                display: block;
+                padding: 15px 0;
+                width: 100%;
+                border-bottom: 1px solid var(--border-color, #eee);
+                font-size: 18px;
+            }
+
+            .theme-switcher {
+                margin-top: 30px;
+                padding-top: 20px;
+                border-top: 2px solid var(--border-color, #eee);
+                width: 100%;
+            }
+
+            /* Адаптация дневника для мобильных */
+            .diary-layout {
+                flex-direction: column;
+            }
+            
+            .diary-entries {
+                margin-right: 0;
+                margin-bottom: 2rem;
+            }
+            
+            .current-courses {
+                width: 100%;
+            }
+        }
+
+        /* Десктопные стили */
+        @media (min-width: 769px) {
+            .nav__menu {
+                display: flex !important;
+            }
+        }
+    </style>
 </head>
-<body>
+<body class="page">
+    <!-- Skip-ссылка для доступности -->
+    <a class="skip-link" href="#main">Перейти к основному содержимому</a>
+
+    <!-- Семантический header с навигацией -->
     <header class="header">
-        <div class="container">
-            <nav class="navbar navbar-expand-lg navbar-light">
-                <div class="container-fluid">
-                    <a class="navbar-brand" href="../index.html">Портфолио</a>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse" id="navbarNav">
-                        <ul class="navbar-nav ms-auto">
-                            <li class="nav-item">
-                                <a class="nav-link" href="../index.html">Главная</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="projects.html">Проекты</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link active" href="diary.html">Дневник</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="contacts.html">Контакты</a>
-                            </li>
-                        </ul>
-                        <div class="theme-switcher">
-                            <button class="theme-toggle" onclick="toggleTheme()">🌙 Тёмная</button>
-                        </div>
+        <nav class="nav" aria-label="Основная навигация">
+            <div class="nav__container">
+                <a class="nav__brand" href="../index.html">Портфолио</a>
+                
+                <!-- Мобильное меню -->
+                <button class="nav__toggle" id="mobileMenuToggle" aria-expanded="false" aria-label="Открыть меню">
+                    <span class="nav__toggle-bar"></span>
+                    <span class="nav__toggle-bar"></span>
+                    <span class="nav__toggle-bar"></span>
+                </button>
+                
+                <div class="nav__menu" id="mobileMenu">
+                    <ul class="nav__list">
+                        <li class="nav__item">
+                            <a class="nav__link" href="../index.html">Главная</a>
+                        </li>
+                        <li class="nav__item">
+                            <a class="nav__link" href="projects.html">Проекты</a>
+                        </li>
+                        <li class="nav__item">
+                            <a class="nav__link active" href="diary.html">Дневник</a>
+                        </li>
+                        <li class="nav__item">
+                            <a class="nav__link" href="contacts.html">Контакты</a>
+                        </li>
+                    </ul>
+                    <div class="theme-switcher">
+                        <button class="theme-toggle" onclick="toggleTheme()">🌙 Тёмная</button>
                     </div>
                 </div>
-            </nav>
-        </div>
+            </div>
+        </nav>
     </header>
 
-    <main class="main">
+    <!-- Основной контент -->
+    <main id="main" class="main">
         <div class="container">
-            <h1 class="diary-title">Мой учебный прогресс</h1>
-            <p class="diary-subtitle">Отслеживание достижений и текущих задач</p>
+            <div class="diary-header">
+                <h1 class="diary-title">Мой учебный прогресс</h1>
+                <p class="diary-subtitle">Отслеживание достижений и текущих задач</p>
+            </div>
 
-            <div class="row">
-                <!-- Левая колонка - записи дневника -->
-                <div class="col-lg-8">
+            <!-- Контейнер для контейнерных запросов -->
+            <div class="diary-area">
+                <div class="diary-layout">
+                    <!-- Левая колонка - записи дневника -->
                     <div class="diary-entries">
                         <div class="diary-entry completed">
                             <div class="entry-icon">✓</div>
@@ -94,10 +204,8 @@
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <!-- Правая колонка - текущие курсы -->
-                <div class="col-lg-4">
+                    <!-- Правая колонка - текущие курсы -->
                     <div class="current-courses">
                         <h3 class="courses-title">Текущие курсы</h3>
                         
@@ -106,8 +214,8 @@
                                 <span class="course-name">Веб-разработка</span>
                                 <span class="course-percent">90%</span>
                             </div>
-                            <div class="progress">
-                                <div class="progress-bar" style="width: 90%"></div>
+                            <div class="course-progress">
+                                <div class="course-progress-bar" style="width: 90%"></div>
                             </div>
                         </div>
 
@@ -116,8 +224,8 @@
                                 <span class="course-name">JavaScript</span>
                                 <span class="course-percent">70%</span>
                             </div>
-                            <div class="progress">
-                                <div class="progress-bar" style="width: 70%"></div>
+                            <div class="course-progress">
+                                <div class="course-progress-bar" style="width: 70%"></div>
                             </div>
                         </div>
 
@@ -126,18 +234,18 @@
                                 <span class="course-name">React</span>
                                 <span class="course-percent">50%</span>
                             </div>
-                            <div class="progress">
-                                <div class="progress-bar" style="width: 50%"></div>
+                            <div class="course-progress">
+                                <div class="course-progress-bar" style="width: 50%"></div>
                             </div>
                         </div>
 
                         <div class="course-item">
                             <div class="course-header">
-                                <span class="course-name">Bootstrap</span>
+                                <span class="course-name">Адаптивная верстка</span>
                                 <span class="course-percent">85%</span>
                             </div>
-                            <div class="progress">
-                                <div class="progress-bar" style="width: 85%"></div>
+                            <div class="course-progress">
+                                <div class="course-progress-bar" style="width: 85%"></div>
                             </div>
                         </div>
 
@@ -149,48 +257,165 @@
     </main>
 
     <!-- Модальное окно для добавления записи -->
-    <div class="modal fade" id="addEntryModal" tabindex="-1">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Добавить новую запись</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                </div>
-                <div class="modal-body">
-                    <form id="addEntryForm">
-                        <div class="form-group">
-                            <label for="entryTitle">Название</label>
-                            <input type="text" id="entryTitle" class="form-control" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="entryDescription">Описание</label>
-                            <textarea id="entryDescription" class="form-control" rows="3" required></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label for="entryStatus">Статус</label>
-                            <select id="entryStatus" class="form-control" required>
-                                <option value="completed">Завершено</option>
-                                <option value="in-progress">В процессе</option>
-                                <option value="planned">Запланировано</option>
-                            </select>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
-                    <button type="button" class="btn btn-primary" onclick="addNewEntry()">Добавить</button>
-                </div>
+    <div class="modal" id="addEntryModal">
+        <div class="modal__overlay" onclick="closeAddEntryModal()"></div>
+        <div class="modal__content">
+            <div class="modal__header">
+                <h3 class="modal__title">Добавить новую запись</h3>
+                <button type="button" class="modal__close" onclick="closeAddEntryModal()" aria-label="Закрыть">
+                    &times;
+                </button>
+            </div>
+            <div class="modal__body">
+                <form id="addEntryForm" class="diary-form">
+                    <div class="form-group">
+                        <label for="entryTitle" class="form-label">Название</label>
+                        <input type="text" id="entryTitle" class="form-input" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="entryDescription" class="form-label">Описание</label>
+                        <textarea id="entryDescription" class="form-textarea" rows="3" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="entryStatus" class="form-label">Статус</label>
+                        <select id="entryStatus" class="form-select" required>
+                            <option value="completed">Завершено</option>
+                            <option value="in-progress">В процессе</option>
+                            <option value="planned">Запланировано</option>
+                        </select>
+                    </div>
+                </form>
+            </div>
+            <div class="modal__footer">
+                <button type="button" class="btn btn--secondary" onclick="closeAddEntryModal()">Отмена</button>
+                <button type="button" class="btn btn--primary" onclick="addNewEntry()">Добавить</button>
             </div>
         </div>
     </div>
 
+    <!-- Футер с safe areas -->
     <footer class="footer">
         <div class="container">
             <p>&copy; 2025 Портфолио студента</p>
         </div>
     </footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="../scripts/script.js"></script>
+    <script>
+        // Функции для модального окна
+        function openAddEntryModal() {
+            document.getElementById('addEntryModal').classList.add('modal--active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeAddEntryModal() {
+            document.getElementById('addEntryModal').classList.remove('modal--active');
+            document.body.style.overflow = 'auto';
+        }
+
+        function addNewEntry() {
+            const title = document.getElementById('entryTitle').value;
+            const description = document.getElementById('entryDescription').value;
+            const status = document.getElementById('entryStatus').value;
+            
+            if (title && description) {
+                // Здесь можно добавить логику сохранения записи
+                alert(`Запись "${title}" добавлена!`);
+                closeAddEntryModal();
+                document.getElementById('addEntryForm').reset();
+            } else {
+                alert('Пожалуйста, заполните все поля');
+            }
+        }
+
+        // Управление тёмной темой
+        function initTheme() {
+            const theme = localStorage.getItem('theme') || 'light';
+            document.documentElement.setAttribute('data-theme', theme);
+            updateThemeButton(theme);
+        }
+
+        function toggleTheme() {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateThemeButton(newTheme);
+        }
+
+        function updateThemeButton(theme) {
+            const themeToggle = document.querySelector('.theme-toggle');
+            if (themeToggle) {
+                themeToggle.textContent = theme === 'light' ? '🌙 Тёмная' : '☀️ Светлая';
+            }
+        }
+
+        // ПРОСТОЙ И РАБОЧИЙ КОД ДЛЯ МОБИЛЬНОГО МЕНЮ
+        function initMobileMenu() {
+            const menuToggle = document.getElementById('mobileMenuToggle');
+            const mobileMenu = document.getElementById('mobileMenu');
+            
+            console.log('Инициализация меню в diary:', {
+                toggle: menuToggle,
+                menu: mobileMenu
+            });
+            
+            if (menuToggle && mobileMenu) {
+                console.log('✅ Элементы меню найдены в diary!');
+                
+                menuToggle.addEventListener('click', function(event) {
+                    event.stopPropagation();
+                    console.log('🎯 КЛИК ПО БУРГЕРУ В DIARY!');
+                    
+                    if (mobileMenu.classList.contains('nav__menu--active')) {
+                        mobileMenu.classList.remove('nav__menu--active');
+                        menuToggle.setAttribute('aria-expanded', 'false');
+                        console.log('📱 Меню закрыто в diary');
+                    } else {
+                        mobileMenu.classList.add('nav__menu--active');
+                        menuToggle.setAttribute('aria-expanded', 'true');
+                        console.log('📱 Меню открыто в diary');
+                    }
+                });
+                
+                // Закрытие меню при клике на ссылку
+                const menuLinks = mobileMenu.querySelectorAll('a');
+                menuLinks.forEach(link => {
+                    link.addEventListener('click', function() {
+                        mobileMenu.classList.remove('nav__menu--active');
+                        menuToggle.setAttribute('aria-expanded', 'false');
+                        console.log('📱 Меню закрыто по клику на ссылку в diary');
+                    });
+                });
+
+                // Закрытие меню при клике вне области
+                document.addEventListener('click', function(event) {
+                    if (!mobileMenu.contains(event.target) && !menuToggle.contains(event.target)) {
+                        mobileMenu.classList.remove('nav__menu--active');
+                        menuToggle.setAttribute('aria-expanded', 'false');
+                    }
+                });
+            } else {
+                console.error('❌ Элементы меню не найдены в diary!');
+            }
+        }
+
+        // Инициализация при загрузке страницы
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('🚀 Страница diary загружена!');
+            
+            initTheme();
+            initMobileMenu();
+
+            console.log('✅ Diary страница инициализирована');
+        });
+
+        // Закрытие модального окна по ESC
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeAddEntryModal();
+            }
+        });
+    </script>
 </body>
 </html>
