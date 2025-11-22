@@ -33,6 +33,162 @@
             transition: 0.3s;
         }
 
+        /* ПРАКТИКА 16: CSS-ГРАФИКА И ВИЗУАЛИЗАЦИЯ */
+        
+        /* Анимированные индикаторы технологий */
+        .tech-visual {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .tech-indicator {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.8rem;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+
+        .tech-indicator:hover {
+            transform: scale(1.1);
+        }
+
+        .tech-html { background: conic-gradient(#e34f26, #e34f26 var(--value, 90%), #ddd var(--value, 90%)); }
+        .tech-css { background: conic-gradient(#1572b6, #1572b6 var(--value, 85%), #ddd var(--value, 85%)); }
+        .tech-js { background: conic-gradient(#f7df1e, #f7df1e var(--value, 80%), #ddd var(--value, 80%)); }
+        .tech-react { background: conic-gradient(#61dafb, #61dafb var(--value, 60%), #ddd var(--value, 60%)); }
+
+        .tech-indicator::before {
+            content: attr(data-tech);
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            background: var(--card-bg);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Адаптивные графики прогресса */
+        .skills-chart {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .chart-item {
+            text-align: center;
+        }
+
+        .chart-bar {
+            width: 100%;
+            height: 20px;
+            background: var(--border-light);
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 0.5rem;
+        }
+
+        .chart-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary-color), #8b5cf6);
+            border-radius: 10px;
+            transition: width 1s ease-in-out;
+            width: 0;
+        }
+
+        /* CSS-иконки для проектов */
+        .project-visual {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1rem;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .visual-portfolio { 
+            background: conic-gradient(from 45deg, #2563eb, #7c3aed, #2563eb);
+            animation: rotate 10s linear infinite;
+        }
+
+        .visual-landing { 
+            background: linear-gradient(135deg, #10b981, #059669);
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+        }
+
+        .visual-game { 
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3);
+        }
+
+        .visual-react { 
+            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* Интерактивные элементы фильтров */
+        .filter-btn {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .filter-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .filter-btn:hover::before {
+            left: 100%;
+        }
+
+        /* Адаптивная статистика */
+        .projects-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 1rem;
+            background: var(--card-bg);
+            border-radius: 8px;
+            border: 1px solid var(--border-light);
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            display: block;
+        }
+
         /* Мобильные стили */
         @media (max-width: 768px) {
             .nav__toggle {
@@ -81,6 +237,26 @@
                 padding-top: 20px;
                 border-top: 2px solid var(--border-color, #eee);
                 width: 100%;
+            }
+
+            /* Адаптивность для Практики 16 */
+            .tech-visual {
+                flex-wrap: wrap;
+                gap: 0.5rem;
+            }
+
+            .tech-indicator {
+                width: 40px;
+                height: 40px;
+                font-size: 0.7rem;
+            }
+
+            .skills-chart {
+                grid-template-columns: 1fr;
+            }
+
+            .projects-stats {
+                grid-template-columns: repeat(2, 1fr);
             }
         }
 
@@ -138,6 +314,54 @@
             <div class="projects-header">
                 <h1 class="projects-title">Мои проекты</h1>
                 
+                <!-- ПРАКТИКА 16: Статистика проектов -->
+                <div class="projects-stats">
+                    <div class="stat-item">
+                        <span class="stat-number" id="totalProjects">6</span>
+                        <span>Всего проектов</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number" id="htmlProjects">3</span>
+                        <span>HTML/CSS</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number" id="jsProjects">1</span>
+                        <span>JavaScript</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number" id="reactProjects">1</span>
+                        <span>React</span>
+                    </div>
+                </div>
+
+                <!-- ПРАКТИКА 16: Визуализация навыков -->
+                <div class="skills-chart">
+                    <div class="chart-item">
+                        <div class="chart-bar">
+                            <div class="chart-fill" data-value="90" style="width: 0%"></div>
+                        </div>
+                        <span>HTML/CSS - 90%</span>
+                    </div>
+                    <div class="chart-item">
+                        <div class="chart-bar">
+                            <div class="chart-fill" data-value="80" style="width: 0%"></div>
+                        </div>
+                        <span>JavaScript - 80%</span>
+                    </div>
+                    <div class="chart-item">
+                        <div class="chart-bar">
+                            <div class="chart-fill" data-value="85" style="width: 0%"></div>
+                        </div>
+                        <span>Адаптивная вёрстка - 85%</span>
+                    </div>
+                    <div class="chart-item">
+                        <div class="chart-bar">
+                            <div class="chart-fill" data-value="60" style="width: 0%"></div>
+                        </div>
+                        <span>React - 60%</span>
+                    </div>
+                </div>
+                
                 <!-- Фильтры -->
                 <div class="projects-filters">
                     <button class="filter-btn active" data-filter="all">Все</button>
@@ -191,6 +415,7 @@
                 technologies: ["HTML", "CSS", "JavaScript"],
                 details: "Элегантный адаптивный сайт-портфолио с акцентом на чистый дизайн и удобство использования. Полностью адаптирован для мобильных устройств.",
                 icon: "🌐",
+                visual: "visual-portfolio",
                 date: "Октябрь 2025",
                 demoLink: "http://127.0.0.1:5500/index.html",
                 githubLink: "https://github.com/Evenysh/my_portfolio"
@@ -203,6 +428,7 @@
                 technologies: ["HTML", "CSS"],
                 details: "Простой и чистый одностраничный сайт, созданный для отработки навыков вёрстки и освоения базовых принципов веб-дизайна.",
                 icon: "✅",
+                visual: "visual-landing",
                 date: "Сентябрь 2025",
                 demoLink: "https://evenysh.github.io/four_rules_of_layout/",
                 githubLink: "https://github.com/Evenysh/four_rules_of_layout"
@@ -215,6 +441,7 @@
                 technologies: ["JavaScript", "HTML", "CSS"],
                 details: "Учебный проект по созданию портфолио студента с использованием современных веб-технологий и адаптивного дизайна.",
                 icon: "🌐",
+                visual: "visual-portfolio",
                 date: "Ноябрь 2025",
                 demoLink: "https://evenysh.github.io/frontend-and-backend-practice/",
                 githubLink: "https://github.com/Evenysh/frontend-and-backend-practice"
@@ -227,6 +454,7 @@
                 technologies: ["React", "JavaScript", "CSS"],
                 details: "Современное React-приложение с использованием хуков и функциональных компонентов.",
                 icon: "⚛️",
+                visual: "visual-react",
                 date: "Декабрь 2025",
                 demoLink: "#",
                 githubLink: "#"
@@ -239,6 +467,7 @@
                 technologies: ["JavaScript", "HTML5", "CSS"],
                 details: "Увлекательная браузерная игра, разработанная с использованием нативного JavaScript и Canvas API.",
                 icon: "🎮",
+                visual: "visual-game",
                 date: "Январь 2025",
                 demoLink: "#",
                 githubLink: "#"
@@ -251,6 +480,7 @@
                 technologies: ["HTML", "CSS", "JavaScript"],
                 details: "Красивый адаптивный лендинг с анимациями и интерактивными элементами.",
                 icon: "📱",
+                visual: "visual-landing",
                 date: "Февраль 2025",
                 demoLink: "#",
                 githubLink: "#"
@@ -266,14 +496,27 @@
             
             container.innerHTML = filteredProjects.map(project => `
                 <article class="project-card" onclick="openProjectModal(${project.id})">
-                    <div class="project-card__icon">${project.icon}</div>
+                    <!-- ПРАКТИКА 16: CSS-визуализация вместо иконки -->
+                    <div class="project-visual ${project.visual}">
+                        ${project.icon}
+                    </div>
                     <h3 class="project-card__title">${project.title}</h3>
                     <p class="project-card__description">${project.description}</p>
-                    <div class="project-card__tech">
-                        ${project.technologies.map(tech => 
-                            `<span class="tech-tag">${tech}</span>`
-                        ).join('')}
+                    
+                    <!-- ПРАКТИКА 16: Визуализация технологий -->
+                    <div class="tech-visual">
+                        ${project.technologies.map(tech => {
+                            const values = { 'HTML': 90, 'CSS': 85, 'JavaScript': 80, 'React': 60 };
+                            const value = values[tech] || 70;
+                            return `
+                                <div class="tech-indicator tech-${tech.toLowerCase()}" 
+                                     data-tech="${tech}" 
+                                     style="--value: ${value}%">
+                                </div>
+                            `;
+                        }).join('')}
                     </div>
+                    
                     <div class="project-card__category">
                         <span class="category-badge category-${project.category}">${project.category}</span>
                     </div>
@@ -332,6 +575,31 @@
                     renderProjects(filter);
                 });
             });
+        }
+
+        // ПРАКТИКА 16: Анимация графиков
+        function animateCharts() {
+            const chartFills = document.querySelectorAll('.chart-fill');
+            chartFills.forEach(chart => {
+                const value = chart.getAttribute('data-value');
+                setTimeout(() => {
+                    chart.style.width = value + '%';
+                }, 300);
+            });
+        }
+
+        // ПРАКТИКА 16: Обновление статистики
+        function updateStats() {
+            const total = projectsData.length;
+            const html = projectsData.filter(p => p.category === 'html').length;
+            const js = projectsData.filter(p => p.category === 'js').length;
+            const react = projectsData.filter(p => p.category === 'react').length;
+            const web = projectsData.filter(p => p.category === 'web').length;
+
+            document.getElementById('totalProjects').textContent = total;
+            document.getElementById('htmlProjects').textContent = html + web; // HTML + Web проекты
+            document.getElementById('jsProjects').textContent = js;
+            document.getElementById('reactProjects').textContent = react;
         }
 
         // Управление тёмной темой
@@ -415,6 +683,10 @@
             renderProjects();
             initFilters();
             initMobileMenu();
+            updateStats();
+            
+            // ПРАКТИКА 16: Запуск анимаций после загрузки
+            setTimeout(animateCharts, 500);
 
             console.log('✅ Projects страница инициализирована');
         });

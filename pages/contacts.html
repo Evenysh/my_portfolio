@@ -33,6 +33,285 @@
             transition: 0.3s;
         }
 
+        /* ПРАКТИКА 16: CSS-ГРАФИКА И ВИЗУАЛИЗАЦИЯ ДЛЯ КОНТАКТОВ */
+        
+        /* Анимированные контактные иконки */
+        .contact-visual {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .contact-method {
+            text-align: center;
+            padding: 1.5rem;
+            background: var(--card-bg);
+            border-radius: 12px;
+            border: 1px solid var(--border-light);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-method::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(37, 99, 235, 0.1), transparent);
+            transition: left 0.5s;
+        }
+
+        .contact-method:hover::before {
+            left: 100%;
+        }
+
+        .contact-method:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        .method-icon {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 1rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            position: relative;
+        }
+
+        .method-email { 
+            background: conic-gradient(from 45deg, #2563eb, #7c3aed, #2563eb);
+            animation: rotate 10s linear infinite;
+        }
+
+        .method-phone { 
+            background: linear-gradient(135deg, #10b981, #059669);
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+        }
+
+        .method-github { 
+            background: linear-gradient(135deg, #1a202c, #2d3748);
+            box-shadow: 0 4px 15px rgba(26, 32, 44, 0.3);
+        }
+
+        .method-location { 
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3);
+        }
+
+        .method-time { 
+            background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+            box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3);
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* Пульсирующая анимация для доступности */
+        .pulse-dot {
+            width: 12px;
+            height: 12px;
+            background: #10b981;
+            border-radius: 50%;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            animation: pulse-dot 2s infinite;
+        }
+
+        @keyframes pulse-dot {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.2); opacity: 0.7; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        /* Стили для интерактивной карты */
+        .map-visual {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, #e2e8f0, #cbd5e1);
+            border-radius: 12px;
+            margin: 2rem 0;
+            position: relative;
+            overflow: hidden;
+            border: 2px solid var(--border-light);
+        }
+
+        .map-point {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+        }
+
+        .map-marker {
+            width: 30px;
+            height: 30px;
+            background: #ef4444;
+            border-radius: 50% 50% 50% 0;
+            transform: rotate(-45deg);
+            position: relative;
+            animation: bounce 2s infinite;
+        }
+
+        .map-marker::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 15px;
+            height: 15px;
+            background: white;
+            border-radius: 50%;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: rotate(-45deg) translateY(0); }
+            50% { transform: rotate(-45deg) translateY(-10px); }
+        }
+
+        /* Анимированная форма */
+        .form-group {
+            position: relative;
+        }
+
+        .form-input:focus ~ .input-focus-line {
+            width: 100%;
+        }
+
+        .input-focus-line {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary-color), #8b5cf6);
+            transition: width 0.3s ease;
+        }
+
+        /* CSS-визуализация статуса отправки */
+        .submit-status {
+            display: none;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-top: 1rem;
+            text-align: center;
+            animation: slideDown 0.3s ease;
+        }
+
+        .submit-success {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+        }
+
+        .submit-error {
+            background: linear-gradient(135deg, #ef4444, #dc2626);
+            color: white;
+        }
+
+        @keyframes slideDown {
+            from { transform: translateY(-10px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        /* Социальные связи */
+        .social-connections {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .social-link {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .social-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .social-link:hover::before {
+            left: 100%;
+        }
+
+        .social-github { background: #1a202c; color: white; }
+        .social-email { background: #2563eb; color: white; }
+        .social-telegram { background: #3b82f6; color: white; }
+
+        .social-link:hover {
+            transform: translateY(-3px) scale(1.1);
+        }
+
+        /* Стили для блока дополнительной информации */
+        .contact-info {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 2rem;
+            border: 1px solid var(--border-light);
+            height: fit-content;
+            min-height: 400px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            background: var(--bg-color);
+            border-radius: 8px;
+            border: 1px solid var(--border-light);
+        }
+
+        .contact-icon {
+            font-size: 1.2rem;
+            margin-right: 1rem;
+            min-width: 40px;
+        }
+
+        .contact-details {
+            flex: 1;
+        }
+
+        .contact-details strong {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--text-color);
+        }
+
+        .contact-details p {
+            margin: 0;
+            color: var(--text-light);
+            line-height: 1.4;
+        }
+
         /* Мобильные стили */
         @media (max-width: 768px) {
             .nav__toggle {
@@ -95,6 +374,32 @@
             
             .contact-info {
                 width: 100%;
+                min-height: auto;
+            }
+
+            /* Адаптивность для Практики 16 */
+            .contact-visual {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 0.5rem;
+            }
+
+            .contact-method {
+                padding: 1rem;
+            }
+
+            .method-icon {
+                width: 50px;
+                height: 50px;
+                font-size: 1.2rem;
+            }
+
+            .social-connections {
+                flex-wrap: wrap;
+            }
+
+            .contact-item {
+                padding: 0.8rem;
+                margin-bottom: 1rem;
             }
         }
 
@@ -102,6 +407,19 @@
         @media (min-width: 769px) {
             .nav__menu {
                 display: flex !important;
+            }
+
+            .contacts-layout {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 2rem;
+                align-items: start;
+            }
+
+            .contact-form,
+            .contact-info {
+                height: auto;
+                min-height: 500px;
             }
         }
     </style>
@@ -152,6 +470,52 @@
             <div class="contacts-header">
                 <h1 class="contacts-title">Свяжитесь со мной</h1>
                 <p class="contacts-subtitle">Буду рад обсудить новые возможности и проекты</p>
+
+                <!-- ПРАКТИКА 16: Визуализация контактов -->
+                <div class="contact-visual">
+                    <div class="contact-method">
+                        <div class="method-icon method-email">📧</div>
+                        <strong>Email</strong>
+                        <p>evgeniya.razina.06@mail.ru</p>
+                        <div class="pulse-dot"></div>
+                    </div>
+                    <div class="contact-method">
+                        <div class="method-icon method-phone">📱</div>
+                        <strong>Телефон</strong>
+                        <p>+7 (910) 123-34-18</p>
+                    </div>
+                    <div class="contact-method">
+                        <div class="method-icon method-github">💼</div>
+                        <strong>GitHub</strong>
+                        <p>github.com/Evenysh</p>
+                    </div>
+                    <div class="contact-method">
+                        <div class="method-icon method-time">🕒</div>
+                        <strong>Время работы</strong>
+                        <p>Пн-Пт: 9:00-18:00</p>
+                    </div>
+                </div>
+
+                <!-- ПРАКТИКА 16: Социальные связи -->
+                <div class="social-connections">
+                    <a href="mailto:evgeniya.razina.06@mail.ru" class="social-link social-email" aria-label="Email">
+                        📧
+                    </a>
+                    <a href="https://github.com/Evenysh" target="_blank" class="social-link social-github" aria-label="GitHub">
+                        💼
+                    </a>
+                    <a href="#" class="social-link social-telegram" aria-label="Telegram">
+                        ✈️
+                    </a>
+                </div>
+
+                <!-- ПРАКТИКА 16: Интерактивная карта -->
+                <div class="map-visual">
+                    <div class="map-point">
+                        <div class="map-marker"></div>
+                        <p style="margin-top: 40px; color: var(--text-dark); font-weight: 500;">Москва, Россия</p>
+                    </div>
+                </div>
             </div>
 
             <!-- Контейнер для контейнерных запросов -->
@@ -163,68 +527,69 @@
                             <div class="form-group">
                                 <label for="name" class="form-label">Имя *</label>
                                 <input type="text" id="name" name="name" class="form-input" required placeholder="Введите ваше имя">
+                                <div class="input-focus-line"></div>
                             </div>
 
                             <div class="form-group">
                                 <label for="email" class="form-label">Email *</label>
                                 <input type="email" id="email" name="email" class="form-input" required placeholder="example@mail.ru">
+                                <div class="input-focus-line"></div>
                             </div>
 
                             <div class="form-group">
                                 <label for="subject" class="form-label">Тема</label>
                                 <input type="text" id="subject" name="subject" class="form-input" placeholder="Тема сообщения">
+                                <div class="input-focus-line"></div>
                             </div>
 
                             <div class="form-group">
                                 <label for="message" class="form-label">Сообщение *</label>
                                 <textarea id="message" name="message" class="form-textarea" rows="5" required placeholder="Опишите вашу проблему или вопрос..."></textarea>
+                                <div class="input-focus-line"></div>
                             </div>
 
-                            <button type="submit" class="submit-btn">Отправить сообщение</button>
+                            <div id="submitStatus" class="submit-status"></div>
+
+                            <button type="submit" class="submit-btn">
+                                <span class="btn-text">Отправить сообщение</span>
+                                <span class="btn-loading" style="display: none;">Отправка...</span>
+                            </button>
                         </form>
                     </div>
 
-                    <!-- Контактная информация -->
+                    <!-- Блок с дополнительной информацией вместо дублирующих контактов -->
                     <div class="contact-info">
-                        <h3 class="contact-info-title">Контакты</h3>
+                        <h3 class="contact-info-title">Дополнительная информация</h3>
                         
                         <div class="contact-item">
-                            <div class="contact-icon">📧</div>
+                            <div class="contact-icon">🚀</div>
                             <div class="contact-details">
-                                <strong>Email</strong>
-                                <p>evgeniya.razina.06@mail.ru</p>
+                                <strong>Быстрый ответ</strong>
+                                <p>Отвечаю на сообщения в течение 24 часов в рабочее время</p>
                             </div>
                         </div>
 
                         <div class="contact-item">
-                            <div class="contact-icon">📱</div>
+                            <div class="contact-icon">💬</div>
                             <div class="contact-details">
-                                <strong>Телефон</strong>
-                                <p>+7 (910) 123-34-18</p>
+                                <strong>Предпочтительный способ связи</strong>
+                                <p>Email для формальных вопросов, Telegram для срочных</p>
                             </div>
                         </div>
 
                         <div class="contact-item">
-                            <div class="contact-icon">💼</div>
+                            <div class="contact-icon">📅</div>
                             <div class="contact-details">
-                                <strong>GitHub</strong>
-                                <p>github.com/Evenysh</p>
+                                <strong>Доступность</strong>
+                                <p>Готов к онлайн-встречам по предварительной договоренности</p>
                             </div>
                         </div>
 
                         <div class="contact-item">
-                            <div class="contact-icon">🏠</div>
+                            <div class="contact-icon">⚡</div>
                             <div class="contact-details">
-                                <strong>Адрес</strong>
-                                <p>г. Москва, ул. Пушкина, д. Колотушкина</p>
-                            </div>
-                        </div>
-
-                        <div class="contact-item">
-                            <div class="contact-icon">🕒</div>
-                            <div class="contact-details">
-                                <strong>Время работы</strong>
-                                <p>Пн-Пт: 9:00-18:00</p>
+                                <strong>Срочные проекты</strong>
+                                <p>Рассматриваю срочные заказы с обсуждением сроков и условий</p>
                             </div>
                         </div>
                     </div>
@@ -241,22 +606,100 @@
     </footer>
 
     <script>
-        // Обработка формы
+        // ПРАКТИКА 16: Улучшенная обработка формы
         document.getElementById('contactForm').addEventListener('submit', function(e) {
             e.preventDefault();
             
             const name = document.getElementById('name').value;
             const email = document.getElementById('email').value;
             const message = document.getElementById('message').value;
+            const submitBtn = this.querySelector('.submit-btn');
+            const btnText = submitBtn.querySelector('.btn-text');
+            const btnLoading = submitBtn.querySelector('.btn-loading');
+            const statusDiv = document.getElementById('submitStatus');
             
             if (name && email && message) {
-                // Здесь можно добавить отправку формы
-                alert(`Спасибо, ${name}! Ваше сообщение отправлено.`);
-                this.reset();
+                // Показать индикатор загрузки
+                btnText.style.display = 'none';
+                btnLoading.style.display = 'inline';
+                submitBtn.disabled = true;
+                
+                // Имитация отправки
+                setTimeout(() => {
+                    // Скрыть индикатор загрузки
+                    btnText.style.display = 'inline';
+                    btnLoading.style.display = 'none';
+                    submitBtn.disabled = false;
+                    
+                    // Показать статус успеха
+                    statusDiv.style.display = 'block';
+                    statusDiv.className = 'submit-status submit-success';
+                    statusDiv.innerHTML = `
+                        <strong>Успешно!</strong> Спасибо, ${name}! Ваше сообщение отправлено. 
+                        Ответим на ${email} в течение 24 часов.
+                    `;
+                    
+                    // Сброс формы
+                    this.reset();
+                    
+                    // Скрыть статус через 5 секунд
+                    setTimeout(() => {
+                        statusDiv.style.display = 'none';
+                    }, 5000);
+                    
+                }, 2000);
             } else {
-                alert('Пожалуйста, заполните все обязательные поля');
+                // Показать статус ошибки
+                statusDiv.style.display = 'block';
+                statusDiv.className = 'submit-status submit-error';
+                statusDiv.innerHTML = '<strong>Ошибка!</strong> Пожалуйста, заполните все обязательные поля.';
+                
+                // Скрыть статус через 3 секунды
+                setTimeout(() => {
+                    statusDiv.style.display = 'none';
+                }, 3000);
             }
         });
+
+        // ПРАКТИКА 16: Анимация элементов при загрузке
+        function animateContactElements() {
+            const contactMethods = document.querySelectorAll('.contact-method');
+            contactMethods.forEach((method, index) => {
+                method.style.opacity = '0';
+                method.style.transform = 'translateY(20px)';
+                setTimeout(() => {
+                    method.style.transition = 'all 0.5s ease';
+                    method.style.opacity = '1';
+                    method.style.transform = 'translateY(0)';
+                }, index * 100);
+            });
+
+            // Анимация социальных ссылок
+            const socialLinks = document.querySelectorAll('.social-link');
+            socialLinks.forEach((link, index) => {
+                link.style.opacity = '0';
+                link.style.transform = 'scale(0)';
+                setTimeout(() => {
+                    link.style.transition = 'all 0.3s ease';
+                    link.style.opacity = '1';
+                    link.style.transform = 'scale(1)';
+                }, 500 + index * 100);
+            });
+        }
+
+        // ПРАКТИКА 16: Интерактивность для карты
+        function initMapInteractivity() {
+            const map = document.querySelector('.map-visual');
+            const marker = document.querySelector('.map-marker');
+            
+            map.addEventListener('mouseenter', function() {
+                marker.style.animation = 'bounce 1s infinite';
+            });
+            
+            map.addEventListener('mouseleave', function() {
+                marker.style.animation = 'bounce 2s infinite';
+            });
+        }
 
         // Управление тёмной темой
         function initTheme() {
@@ -337,6 +780,12 @@
             
             initTheme();
             initMobileMenu();
+            
+            // ПРАКТИКА 16: Запуск анимаций
+            setTimeout(() => {
+                animateContactElements();
+                initMapInteractivity();
+            }, 300);
 
             console.log('✅ Contacts страница инициализирована');
         });

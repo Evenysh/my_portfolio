@@ -23,16 +23,58 @@ function updateThemeButton(theme) {
     }
 }
 
-// Мобильное меню
+// Мобильное меню - ИСПРАВЛЕННАЯ ВЕРСИЯ
 function initMobileMenu() {
     const toggle = document.querySelector('.nav__toggle');
     const menu = document.querySelector('.nav__menu');
     
     if (toggle && menu) {
-        toggle.addEventListener('click', () => {
+        toggle.addEventListener('click', function(e) {
+            e.stopPropagation(); // Предотвращаем всплытие
+            
             const isExpanded = toggle.getAttribute('aria-expanded') === 'true';
-            toggle.setAttribute('aria-expanded', !isExpanded);
-            menu.classList.toggle('nav__menu--active');
+            
+            if (isExpanded) {
+                // Закрываем меню
+                menu.classList.remove('nav__menu--active');
+                toggle.setAttribute('aria-expanded', 'false');
+                document.body.style.overflow = 'auto'; // Разрешаем скролл
+            } else {
+                // Открываем меню
+                menu.classList.add('nav__menu--active');
+                toggle.setAttribute('aria-expanded', 'true');
+                document.body.style.overflow = 'hidden'; // Запрещаем скролл тела
+            }
+        });
+        
+        // Закрытие меню при клике на ссылку
+        const menuLinks = menu.querySelectorAll('a');
+        menuLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                menu.classList.remove('nav__menu--active');
+                toggle.setAttribute('aria-expanded', 'false');
+                document.body.style.overflow = 'auto';
+            });
+        });
+
+        // Закрытие меню при клике вне области
+        document.addEventListener('click', function(event) {
+            if (menu.classList.contains('nav__menu--active') && 
+                !menu.contains(event.target) && 
+                !toggle.contains(event.target)) {
+                menu.classList.remove('nav__menu--active');
+                toggle.setAttribute('aria-expanded', 'false');
+                document.body.style.overflow = 'auto';
+            }
+        });
+
+        // Закрытие меню по ESC
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape' && menu.classList.contains('nav__menu--active')) {
+                menu.classList.remove('nav__menu--active');
+                toggle.setAttribute('aria-expanded', 'false');
+                document.body.style.overflow = 'auto';
+            }
         });
     }
 }
@@ -275,22 +317,27 @@ function handleContactSubmit(event) {
 // ==================== ОБЩАЯ ИНИЦИАЛИЗАЦИЯ ====================
 
 document.addEventListener('DOMContentLoaded', function() {
+    console.log('🚀 Страница загружена! Инициализация...');
+    
     initTheme();
-    initMobileMenu();
+    initMobileMenu(); // Важная строка!
     
     // Главная страница
     if (document.getElementById('homeProjectsContainer')) {
+        console.log('📁 Рендерим проекты на главной...');
         renderHomepageProjects();
     }
     
     // Страница проектов
     if (document.getElementById('projectsGrid')) {
+        console.log('📁 Рендерим все проекты...');
         renderProjects();
         setupFilters();
     }
     
     // Страница контактов
     if (document.getElementById('contactForm')) {
+        console.log('📧 Инициализируем форму контактов...');
         document.getElementById('contactForm').addEventListener('submit', handleContactSubmit);
     }
     
@@ -303,9 +350,14 @@ document.addEventListener('DOMContentLoaded', function() {
             bar.style.width = width;
         }, 300);
     });
+    
+    console.log('✅ Инициализация завершена!');
 });
-document.addEventListener('DOMContentLoaded', function() {
-    initTheme();
-    initMobileMenu(); // ← ЭТА СТРОКА ДОЛЖНА БЫТЬ!
-    // ... остальной код
+
+// Закрытие модальных окон по ESC
+document.addEventListener('keydown', function(event) {
+    if (event.key === 'Escape') {
+        closeProjectModal();
+        closeAddEntryModal();
+    }
 });

@@ -33,6 +33,197 @@
             transition: 0.3s;
         }
 
+        /* ПРАКТИКА 16: CSS-ГРАФИКА И ВИЗУАЛИЗАЦИЯ ДЛЯ ДНЕВНИКА */
+        
+        /* Анимированные индикаторы прогресса */
+        .progress-visual {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .progress-item {
+            text-align: center;
+            padding: 1rem;
+            background: var(--card-bg);
+            border-radius: 12px;
+            border: 1px solid var(--border-light);
+            transition: transform 0.3s ease;
+        }
+
+        .progress-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .progress-circle {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 0.5rem;
+            border-radius: 50%;
+            background: conic-gradient(var(--color) var(--value), var(--border-light) 0);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .progress-circle::before {
+            content: '';
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            background: var(--card-bg);
+            border-radius: 50%;
+        }
+
+        .progress-percent {
+            position: relative;
+            font-weight: bold;
+            font-size: 1.1rem;
+            color: var(--text-dark);
+        }
+
+        /* CSS-анимации для статусов */
+        .status-pulse {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .status-rotate {
+            animation: rotate 3s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* Визуализация временной линии */
+        .timeline {
+            position: relative;
+            margin: 2rem 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 20px;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(to bottom, var(--primary-color), #8b5cf6);
+            border-radius: 2px;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 2rem;
+            padding-left: 50px;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: 12px;
+            top: 5px;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            border: 3px solid var(--card-bg);
+            z-index: 2;
+        }
+
+        .timeline-dot.completed { background: #10b981; }
+        .timeline-dot.in-progress { 
+            background: #f59e0b;
+            animation: pulse 2s infinite;
+        }
+        .timeline-dot.planned { background: #6b7280; }
+
+        /* Интерактивные карточки курсов */
+        .course-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            border: 1px solid var(--border-light);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .course-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--course-color, var(--primary-color));
+        }
+
+        .course-card:hover {
+            transform: translateX(10px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+
+        /* CSS-иконки для статусов */
+        .status-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 1rem;
+            flex-shrink: 0;
+        }
+
+        .status-completed {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+        }
+
+        .status-in-progress {
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            color: white;
+            animation: pulse 2s infinite;
+        }
+
+        .status-planned {
+            background: linear-gradient(135deg, #6b7280, #4b5563);
+            color: white;
+        }
+
+        /* Адаптивные графики */
+        .skills-radar {
+            width: 200px;
+            height: 200px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .radar-chart {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: conic-gradient(
+                from 0deg,
+                var(--primary-color) 0% 25%,
+                #8b5cf6 25% 50%,
+                #10b981 50% 75%,
+                #f59e0b 75% 100%
+            );
+            mask: radial-gradient(circle at center, transparent 60%, black 61%);
+            animation: rotate 10s linear infinite;
+        }
+
         /* Мобильные стили */
         @media (max-width: 768px) {
             .nav__toggle {
@@ -96,6 +287,36 @@
             .current-courses {
                 width: 100%;
             }
+
+            /* Адаптивность для Практики 16 */
+            .progress-visual {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 0.5rem;
+            }
+
+            .progress-circle {
+                width: 60px;
+                height: 60px;
+            }
+
+            .progress-circle::before {
+                width: 45px;
+                height: 45px;
+            }
+
+            .timeline::before {
+                left: 15px;
+            }
+
+            .timeline-item {
+                padding-left: 40px;
+            }
+
+            .timeline-dot {
+                left: 8px;
+                width: 16px;
+                height: 16px;
+            }
         }
 
         /* Десктопные стили */
@@ -152,6 +373,42 @@
             <div class="diary-header">
                 <h1 class="diary-title">Мой учебный прогресс</h1>
                 <p class="diary-subtitle">Отслеживание достижений и текущих задач</p>
+
+                <!-- ПРАКТИКА 16: Визуализация общего прогресса -->
+                <div class="progress-visual">
+                    <div class="progress-item">
+                        <div class="progress-circle" style="--color: #10b981; --value: 75%">
+                            <span class="progress-percent">75%</span>
+                        </div>
+                        <span>Общий прогресс</span>
+                    </div>
+                    <div class="progress-item">
+                        <div class="progress-circle" style="--color: #3b82f6; --value: 90%">
+                            <span class="progress-percent">90%</span>
+                        </div>
+                        <span>Веб-разработка</span>
+                    </div>
+                    <div class="progress-item">
+                        <div class="progress-circle" style="--color: #f59e0b; --value: 70%">
+                            <span class="progress-percent">70%</span>
+                        </div>
+                        <span>JavaScript</span>
+                    </div>
+                    <div class="progress-item">
+                        <div class="progress-circle" style="--color: #8b5cf6; --value: 50%">
+                            <span class="progress-percent">50%</span>
+                        </div>
+                        <span>React</span>
+                    </div>
+                </div>
+
+                <!-- ПРАКТИКА 16: Радар навыков -->
+                <div style="text-align: center; margin: 2rem 0;">
+                    <div class="skills-radar">
+                        <div class="radar-chart"></div>
+                    </div>
+                    <p style="color: var(--text-light); margin-top: 1rem;">Визуализация навыков веб-разработки</p>
+                </div>
             </div>
 
             <!-- Контейнер для контейнерных запросов -->
@@ -159,48 +416,66 @@
                 <div class="diary-layout">
                     <!-- Левая колонка - записи дневника -->
                     <div class="diary-entries">
-                        <div class="diary-entry completed">
-                            <div class="entry-icon">✓</div>
-                            <div class="entry-content">
-                                <h3>Верстка макета сайта</h3>
-                                <p>Завершена работа над адаптивной версткой главной страницы портфолио</p>
-                                <span class="entry-date">15 декабря 2024</span>
+                        <!-- ПРАКТИКА 16: Временная линия -->
+                        <div class="timeline">
+                            <div class="timeline-item">
+                                <div class="timeline-dot completed"></div>
+                                <div class="diary-entry completed">
+                                    <div class="status-icon status-completed">✓</div>
+                                    <div class="entry-content">
+                                        <h3>Верстка макета сайта</h3>
+                                        <p>Завершена работа над адаптивной версткой главной страницы портфолио. Использованы современные техники CSS Grid и Flexbox.</p>
+                                        <span class="entry-date">15 декабря 2024</span>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="diary-entry completed">
-                            <div class="entry-icon">✓</div>
-                            <div class="entry-content">
-                                <h3>JavaScript основы</h3>
-                                <p>Изучены базовые концепции JavaScript, DOM manipulation и работа с событиями</p>
-                                <span class="entry-date">10 декабря 2024</span>
+                            <div class="timeline-item">
+                                <div class="timeline-dot completed"></div>
+                                <div class="diary-entry completed">
+                                    <div class="status-icon status-completed">✓</div>
+                                    <div class="entry-content">
+                                        <h3>JavaScript основы</h3>
+                                        <p>Изучены базовые концепции JavaScript, DOM manipulation и работа с событиями. Созданы интерактивные элементы для сайта.</p>
+                                        <span class="entry-date">10 декабря 2024</span>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="diary-entry in-progress">
-                            <div class="entry-icon">⟳</div>
-                            <div class="entry-content">
-                                <h3>Работа с формами</h3>
-                                <p>Изучение валидации форм, обработки пользовательского ввода и отправки данных</p>
-                                <span class="entry-date">5 декабря 2024 - в процессе</span>
+                            <div class="timeline-item">
+                                <div class="timeline-dot in-progress"></div>
+                                <div class="diary-entry in-progress">
+                                    <div class="status-icon status-in-progress">⟳</div>
+                                    <div class="entry-content">
+                                        <h3>Работа с формами</h3>
+                                        <p>Изучение валидации форм, обработки пользовательского ввода и отправки данных. Практика с современными API.</p>
+                                        <span class="entry-date">5 декабря 2024 - в процессе</span>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="diary-entry in-progress">
-                            <div class="entry-icon">⟳</div>
-                            <div class="entry-content">
-                                <h3>Адаптивный дизайн</h3>
-                                <p>Освоение техник создания полностью адаптивных интерфейсов для разных устройств</p>
-                                <span class="entry-date">1 декабря 2024 - в процессе</span>
+                            <div class="timeline-item">
+                                <div class="timeline-dot in-progress"></div>
+                                <div class="diary-entry in-progress">
+                                    <div class="status-icon status-in-progress">⟳</div>
+                                    <div class="entry-content">
+                                        <h3>Адаптивный дизайн</h3>
+                                        <p>Освоение техник создания полностью адаптивных интерфейсов для разных устройств. Изучение Container Queries.</p>
+                                        <span class="entry-date">1 декабря 2024 - в процессе</span>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="diary-entry planned">
-                            <div class="entry-icon">📅</div>
-                            <div class="entry-content">
-                                <h3>React основы</h3>
-                                <p>Планируется изучение компонентного подхода и хуков React</p>
-                                <span class="entry-date">Запланировано на январь 2025</span>
+                            <div class="timeline-item">
+                                <div class="timeline-dot planned"></div>
+                                <div class="diary-entry planned">
+                                    <div class="status-icon status-planned">📅</div>
+                                    <div class="entry-content">
+                                        <h3>React основы</h3>
+                                        <p>Планируется изучение компонентного подхода и хуков React. Создание SPA приложения.</p>
+                                        <span class="entry-date">Запланировано на январь 2025</span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -209,7 +484,8 @@
                     <div class="current-courses">
                         <h3 class="courses-title">Текущие курсы</h3>
                         
-                        <div class="course-item">
+                        <!-- ПРАКТИКА 16: Интерактивные карточки курсов -->
+                        <div class="course-card" style="--course-color: #3b82f6">
                             <div class="course-header">
                                 <span class="course-name">Веб-разработка</span>
                                 <span class="course-percent">90%</span>
@@ -217,9 +493,12 @@
                             <div class="course-progress">
                                 <div class="course-progress-bar" style="width: 90%"></div>
                             </div>
+                            <p style="color: var(--text-light); margin-top: 0.5rem; font-size: 0.9rem;">
+                                HTML, CSS, JavaScript, адаптивный дизайн
+                            </p>
                         </div>
 
-                        <div class="course-item">
+                        <div class="course-card" style="--course-color: #f59e0b">
                             <div class="course-header">
                                 <span class="course-name">JavaScript</span>
                                 <span class="course-percent">70%</span>
@@ -227,9 +506,12 @@
                             <div class="course-progress">
                                 <div class="course-progress-bar" style="width: 70%"></div>
                             </div>
+                            <p style="color: var(--text-light); margin-top: 0.5rem; font-size: 0.9rem;">
+                                ES6+, DOM, асинхронное программирование
+                            </p>
                         </div>
 
-                        <div class="course-item">
+                        <div class="course-card" style="--course-color: #8b5cf6">
                             <div class="course-header">
                                 <span class="course-name">React</span>
                                 <span class="course-percent">50%</span>
@@ -237,9 +519,12 @@
                             <div class="course-progress">
                                 <div class="course-progress-bar" style="width: 50%"></div>
                             </div>
+                            <p style="color: var(--text-light); margin-top: 0.5rem; font-size: 0.9rem;">
+                                Компоненты, хуки, управление состоянием
+                            </p>
                         </div>
 
-                        <div class="course-item">
+                        <div class="course-card" style="--course-color: #10b981">
                             <div class="course-header">
                                 <span class="course-name">Адаптивная верстка</span>
                                 <span class="course-percent">85%</span>
@@ -247,6 +532,9 @@
                             <div class="course-progress">
                                 <div class="course-progress-bar" style="width: 85%"></div>
                             </div>
+                            <p style="color: var(--text-light); margin-top: 0.5rem; font-size: 0.9rem;">
+                                Grid, Flexbox, медиа-запросы, Container Queries
+                            </p>
                         </div>
 
                         <button class="add-entry-btn" onclick="openAddEntryModal()">Добавить запись</button>
@@ -325,6 +613,42 @@
             } else {
                 alert('Пожалуйста, заполните все поля');
             }
+        }
+
+        // ПРАКТИКА 16: Анимация прогресса
+        function animateProgressCircles() {
+            const circles = document.querySelectorAll('.progress-circle');
+            circles.forEach(circle => {
+                const value = circle.style.getPropertyValue('--value');
+                circle.style.setProperty('--value', '0%');
+                setTimeout(() => {
+                    circle.style.setProperty('--value', value);
+                }, 300);
+            });
+        }
+
+        // ПРАКТИКА 16: Интерактивные элементы
+        function initInteractiveElements() {
+            // Анимация при наведении на карточки курсов
+            const courseCards = document.querySelectorAll('.course-card');
+            courseCards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateX(10px)';
+                });
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateX(0)';
+                });
+            });
+
+            // Анимация прогресс-баров
+            const progressBars = document.querySelectorAll('.course-progress-bar');
+            progressBars.forEach(bar => {
+                const width = bar.style.width;
+                bar.style.width = '0';
+                setTimeout(() => {
+                    bar.style.width = width;
+                }, 500);
+            });
         }
 
         // Управление тёмной темой
@@ -406,6 +730,12 @@
             
             initTheme();
             initMobileMenu();
+            
+            // ПРАКТИКА 16: Запуск анимаций
+            setTimeout(() => {
+                animateProgressCircles();
+                initInteractiveElements();
+            }, 500);
 
             console.log('✅ Diary страница инициализирована');
         });
