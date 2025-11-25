@@ -33,8 +33,19 @@
             transition: 0.3s;
         }
 
-        /* ПРАКТИКА 17: A11y-АУДИТ И ДОСТУПНОСТЬ */
-        
+        /* ФИКС КОНТРАСТНОСТИ - ОРИГИНАЛЬНЫЕ ЦВЕТА */
+        :root {
+            --text-light: #666;
+            --text-dark: #333;
+            --border-light: #ddd;
+        }
+
+        [data-theme="dark"] {
+            --text-light: #aaa;
+            --text-dark: #fff;
+            --border-light: #555;
+        }
+
         /* Скрытый текст для скринридеров */
         .sr-only {
             position: absolute;
